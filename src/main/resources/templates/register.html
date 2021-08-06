@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
+	
+	<head>
+		<title>Registration</title>
+		<link rel="stylesheet" th:href="@{/css/skillMngStyle.css}">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script th:src="@{/javascript/jquery.min.js}"></script>
+		<script th:src="@{/javascript/skillMngJQ.js}"></script>
+		<style>
+			.gridForm input, .gridForm select{
+				width: 200px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<h3>Employee Data</h3>
+			<hr/>
+			<form method="POST" id="registrationForm" th:action="@{/register}" th:object="${registerForm}">
+				<div class="gridForm">
+					<div><label for="userId">User Id: </label></div>
+					<div><input style="background-color: #BBBBBB;"  th:field="*{userId}" type="text" name="userId" id="userId" maxlength="30"/></div>
+					<div><label for="name">Name: </label></div>
+					<div><input style="background-color: #BBBBBB;" th:field="*{name}" type="text" name="name" id="name" maxlength="30"/></div>
+					<div><label for="age">Age: </label></div>
+					<div><input style="background-color: #BBBBBB;" th:field="*{age}" type="text" name="age" id="age" min="0" max="999" maxlength="3"/></div>
+					<div><label for="password">Password: </label></div>
+					<div><input style="background-color: #BBBBBB;" th:field="*{password}" type="password" name="password" id="password" maxlength="30"/></div>
+					<div><label for="petname">Pet Name: </label></div>
+					<div><input style="background-color: #BBBBBB;" th:field="*{petName}" type="text" name="petname" id="petname" maxlength="30"/></div>
+					<div><label for="gender">Gender: </label></div>
+					<div>
+						<select style="background-color: #BBBBBB;" th:field="*{gender}" name="gender" id="gender">
+						    <option th:each="genderOpt : ${T(com.wipro.rp.skillmng.domain.Gender).values()}" 
+						        th:value="${genderOpt}" th:text="${genderOpt}"></option>
+						</select>				
+					</div>
+					<div><label for="role">Project: </label></div>
+					<div>
+						<select>
+						    <option>PRJ0001BR</option>
+						</select>
+					</div>
+					<div><label for="role">Role: </label></div>
+					<div>
+						<select style="background-color: #BBBBBB;" th:field="*{role}" name="role" id="role">
+						    <option th:each="roleOpt : ${roleList}" 
+						        th:value="${roleOpt.id}" th:text="${roleOpt.name}"></option>
+						</select>
+					</div>
+					<div><label for="band">Band: </label></div>
+					<div>
+						<select style="background-color: #BBBBBB;" th:field="*{band}" name="band" id="band">
+						    <option th:each="bandOpt : ${bandList}" 
+						        th:value="${bandOpt.id}" th:text="${bandOpt.description}"></option>
+						</select>
+					</div>
+					<div></div>
+					<div><button id="register">Save</button></div>
+				</div>
+			</form>
+			<div id="error"><span th:if="${error}">User already exists</span></div>
+		</div>
+	</body>
+	
+</html>

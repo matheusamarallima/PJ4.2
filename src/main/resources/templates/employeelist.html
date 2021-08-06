@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
+	
+	<head>
+		<title>Employee List</title>
+		<link rel="stylesheet" th:href="@{/css/skillMngStyle.css}">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script th:src="@{/javascript/jquery.min.js}"></script>
+		<script th:src="@{/javascript/skillMngJQ.js}"></script>
+	</head>
+	
+	<body>
+		<div class="container">
+			<div class="menu">
+				<ul>
+<!--					sec:authorize="hasRole('ADMIN')"-->
+					<li><a th:href="@{home}">Home</a></li>
+					<li><a th:href="@{skillsearch}">Skill Search</a></li>
+					<li ><a th:href="@{employeelist}">Employee List</a></li>
+					<li>
+						<form name="logoutForm" id="logoutForm" method="post" th:action="@{logout}" th:hidden="true">
+							<input type="submit" value="Logout"/>
+						</form>
+						<a id="logOutLink">Logout</a><br/>
+					</li>
+				</ul>
+			</div>
+			<div class="main">
+				<h3>Employee List</h3>
+				<div>
+					<form name="deleteForm" id="deleteForm" method="post" th:action="@{employeelist}" th:hidden="true">
+						<input type="hidden" id="deleteUserId" th:name="deleteUserId" />
+					</form>				
+					<table>
+						<tr>
+							<th>Name</th>
+							<th>Role</th>
+							<th>Band</th>
+							<th>Action</th>
+						</tr>
+						<tr th:each="employee, loop : ${employeeList}">
+							<td><label th:id="userName+(${loop.index}+1)" th:text="${employee.name}"></label></td>
+							<td><label th:id="role+(${loop.index}+1)" th:text="${employee.role.name}"></label></td>
+							<td><label th:id="band+(${loop.index}+1)" th:text="${employee.band.description}"></label></td>
+							<td><button th:id="deleteUser+(${loop.index}+1)" onclick="javascript: deleteEmployee(this)" th:value="${employee.id}">Delete</button></td>							
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</body>
+	
+</html>

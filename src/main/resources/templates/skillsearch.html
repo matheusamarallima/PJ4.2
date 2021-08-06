@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
+	
+	<head>
+		<title>Skill Management</title>
+		<link rel="stylesheet" th:href="@{/css/skillMngStyle.css}">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script th:src="@{/javascript/jquery.min.js}"></script>
+		<script th:src="@{/javascript/skillMngJQ.js}"></script>
+	</head>
+	
+	<body>
+		<div class="container">
+			<div class="menu">
+				<ul>
+					<li><a th:href="@{home}">Home</a></li>
+					<li><a th:href="@{skillsearch}">Skill Search</a></li>
+					<li><a th:href="@{employeelist}">Employee List</a></li>
+					<li>
+						<form name="logoutForm" id="logoutForm" method="post" th:action="@{logout}" th:hidden="true">
+							<input type="submit" value="Logout"/>
+						</form>
+						<a id="logOutLink">Logout</a><br/>
+					</li>
+				</ul>
+			</div>
+			<div class="main">
+				<h3>Skill Search</h3>
+				
+				<form method="POST" id="searchForm" th:action="@{/skillsearch}" th:object="${searchForm}">
+					<div class="gridForm">
+						<div><label for="role">Role: </label></div>
+						<div>
+							<select name="role" id="role">
+							    <option th:each="roleOpt : ${roleList}"
+							    	th:selected="${roleValue == roleOpt}" 
+							        th:value="${roleOpt.id}" th:text="${roleOpt.name}"></option>
+							</select>
+						</div>
+						
+						<div><label for="band">Band: </label></div>
+						<div>
+							<select name="band" id="band">
+							    <option th:each="bandOpt : ${bandList}"
+							    th:selected="${bandValue == bandOpt}" 
+							        th:value="${bandOpt.id}" th:text="${bandOpt.description}"></option>
+							</select>
+						</div>
+						<div></div>
+						<div><button id="search" name="search">Search</button></div>
+					</div>
+				</form>
+				
+				<hr/>
+				<h3>Skill List</h3>
+				<div>
+					<table>
+						<tr>
+							<th>Skill Id</th>
+							<th>Skill Name</th>
+						</tr>
+						<tr th:each="skillOpt, loop : ${skillList}">
+							<td><label th:id="skillId+(${loop.index}+1)" th:text="${skillOpt.id}"></label></td>
+							<td><label th:id="skillName+(${loop.index}+1)" th:text="${skillOpt.name}"></label></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</body>
+	
+</html>
