@@ -29,22 +29,20 @@
 			</div>
 			<div class="main">
 				<h3>Employee List</h3>
-				<div>
-					<form name="deleteForm" id="deleteForm" method="post" th:action="@{employeelist}" th:hidden="true">
-						<input type="hidden" id="deleteUserId" th:name="deleteUserId" />
-					</form>
-					<table>
+					<table border="1">
 						<tr>
-							<th>Name</th>
-							<th>Role</th>
-							<th>Band</th>
+							<th>Project Id</th>
+							<th>Project Name</th>
+							<th>Start Date</th>
+							<th>End Date</th>
 							<th>Action</th>
 						</tr>
-						<tr th:each="employee, loop : ${employeeList}">
-							<td><label th:id="userName+(${loop.index}+1)" th:text="${employee.name}"></label></td>
-							<td><label th:id="role+(${loop.index}+1)" th:text="${employee.role.name}"></label></td>
-							<td><label th:id="band+(${loop.index}+1)" th:text="${employee.band.description}"></label></td>
-							<td><button th:id="deleteUser+(${loop.index}+1)" onclick="javascript: deleteEmployee(this)" th:value="${employee.id}">Delete</button></td>
+						<tr th:each="project, loop : ${projectList}">
+							<td><label th:id="projectId+(${loop.index}+1)" th:text="${project.projectId}">AAA</label></td>
+							<td><label th:id="projectName+(${loop.index}+1)" th:text="${project.projectName}"></label></td>
+							<td><label th:id="projectStartDate+(${loop.index}+1)" th:text="${project.projectStartDate}"></label></td>
+							<td><label th:id="projectEndDate+(${loop.index}+1)" th:text="${project.projectEndDate}"></label></td>
+<!--							<td><button th:id="deleteUser+(${loop.index}+1)" onclick="javascript: deleteEmployee(this)" th:value="${project.projectId}">Delete</button></td>-->
 						</tr>
 					</table>
 				</div>

@@ -8,6 +8,6 @@ import java.util.List;
 
 @Repository
 public interface ProjectRepository extends CrudRepository<Project, String> {
-    public List<Project> findAllByProjectName();
 
+    public List<Project> findAll();
 }

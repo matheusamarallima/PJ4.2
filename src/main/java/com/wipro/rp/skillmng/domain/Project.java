@@ -1,6 +1,7 @@
 package com.wipro.rp.skillmng.domain;
 
-import org.springframework.data.annotation.Id;
+import javax.persistence.Id;
+
 
 import javax.persistence.*;
 import java.util.List;
@@ -11,10 +12,12 @@ import java.util.Objects;
 public class Project {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long Id;
     private String projectId;
     private String projectName;
-    private String startDate;
+    private String projectStartDate;
+    private String projectEndDate;
     @OneToMany(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "employee")
     private List<Employee> employeeList;
@@ -22,11 +25,12 @@ public class Project {
     public Project() {
     }
 
-    public Project(long id, String projectId, String projectName, String startDate, List<Employee> employeeList) {
+    public Project(long id, String projectId, String projectName, String projectStartDate, String projectEndDate, List<Employee> employeeList) {
         Id = id;
         this.projectId = projectId;
         this.projectName = projectName;
-        this.startDate = startDate;
+        this.projectStartDate = projectStartDate;
+        this.projectEndDate = projectEndDate;
         this.employeeList = employeeList;
     }
 
@@ -54,12 +58,20 @@ public class Project {
         this.projectName = projectName;
     }
 
-    public String getStartDate() {
-        return startDate;
+    public String getProjectStartDate() {
+        return projectStartDate;
     }
 
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
+    public void setProjectStartDate(String projectStartDate) {
+        this.projectStartDate = projectStartDate;
+    }
+
+    public String getProjectEndDate() {
+        return projectEndDate;
+    }
+
+    public void setProjectEndDate(String projectEndDate) {
+        this.projectEndDate = projectEndDate;
     }
 
     public List<Employee> getEmployeeList() {
@@ -75,22 +87,11 @@ public class Project {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Project project = (Project) o;
-        return Id == project.Id && Objects.equals(projectId, project.projectId) && Objects.equals(projectName, project.projectName) && Objects.equals(startDate, project.startDate) && Objects.equals(employeeList, project.employeeList);
+        return Id == project.Id && Objects.equals(projectId, project.projectId) && Objects.equals(projectName, project.projectName) && Objects.equals(projectStartDate, project.projectStartDate) && Objects.equals(projectEndDate, project.projectEndDate) && Objects.equals(employeeList, project.employeeList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(Id, projectId, projectName, startDate, employeeList);
-    }
-
-    @Override
-    public String toString() {
-        return "Project{" +
-                "Id=" + Id +
-                ", projectId='" + projectId + '\'' +
-                ", projectName='" + projectName + '\'' +
-                ", startDate='" + startDate + '\'' +
-                ", employeeList=" + employeeList +
-                '}';
+        return Objects.hash(Id, projectId, projectName, projectStartDate, projectEndDate, employeeList);
     }
 }

@@ -1,0 +1,39 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Registration</title>
+    <link rel="stylesheet" th:href="@{/css/skillMngStyle.css}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script th:src="@{/javascript/jquery.min.js}"></script>
+    <script th:src="@{/javascript/skillMngJQ.js}"></script>
+    <style>
+			.gridForm input, .gridForm select{
+				width: 200px;
+			}
+		</style>
+</head>
+<body>
+<div class="container">
+    <h3>Employee Data</h3>
+    <hr/>
+    <form method="POST" id="projectDataForm" th:action="@{/projectdata}" th:object="${projectDataForm}">
+        <div class="gridForm">
+            <div><label for="projectId">Project Id: </label></div>
+            <div><input style="background-color: #BBBBBB;"  th:field="*{projectId}" type="text" name="projectId" id="projectId" maxlength="30"/></div>
+            <div><label for="projectName">Project Name: </label></div>
+            <div><input style="background-color: #BBBBBB;" th:field="*{projectName}" type="text" name="projectName" id="projectName" maxlength="30"/></div>
+            <div><label for="startDate">Start Date: </label></div>
+            <div><input style="background-color: #BBBBBB;" th:field="*{projectStartDate}" type="text" name="startDate" id="startDate" min="0" max="999" maxlength="3"/></div>
+            <div><label for="endDate">Password: </label></div>
+            <div><input style="background-color: #BBBBBB;" th:field="*{projectEndDate}" type="text" name="endDate" id="endDate" maxlength="30"/></div>
+            </div>
+            <div>
+            <div><button id="register">Save</button></div>
+        </div>
+    </form>
+    <div id="error"><span th:if="${error}">User already exists</span></div>
+</div>
+</body>
+
+</html>
