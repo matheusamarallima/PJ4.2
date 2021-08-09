@@ -37,15 +37,15 @@
 							<th>Name</th>
 							<th>Role</th>
 							<th>Band</th>
-							<th>Action</th>
+
 						</tr>
 						<tr th:each="employee, loop : ${employeeList}">
 							<td><label th:id="userName+(${loop.index}+1)" th:text="${employee.name}"></label></td>
 							<td><label th:id="role+(${loop.index}+1)" th:text="${employee.role.name}"></label></td>
 							<td><label th:id="band+(${loop.index}+1)" th:text="${employee.band.description}"></label></td>
-							<td><button th:id="deleteUser+(${loop.index}+1)" onclick="javascript: deleteEmployee(this)" th:value="${employee.id}">Delete</button></td>							
 						</tr>
 					</table>
+<!--					class="btn btn-primary btn-sm mb-3"-->
 				</div>
 			</div>
 		</div>

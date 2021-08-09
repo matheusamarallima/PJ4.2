@@ -51,7 +51,7 @@ public class ForgotPasswordController {
 		Employee employee = (Employee) model.getAttribute("employee");
 		if(employee != null)
 		{
-			employee.getUser().setPassword(security.encoder().encode(password));
+//			employee.getUser().setPassword(security.encoder().encode(password));
 			this.employeeRepo.save(employee);	
 			return "redirect:/login?success=2";
 		}

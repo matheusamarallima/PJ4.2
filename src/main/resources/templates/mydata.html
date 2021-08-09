@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Registration</title>
+    <link rel="stylesheet" th:href="@{/css/skillMngStyle.css}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script th:src="@{/javascript/jquery.min.js}"></script>
+    <script th:src="@{/javascript/skillMngJQ.js}"></script>
+    <style>
+			.gridForm input, .gridForm select{
+				width: 200px;
+			}
+		</style>
+</head>
+<body>
+<div class="container">
+    <h3>Employee Data</h3>
+    <hr/>
+    <form method="POST" id="myData" th:action="@{/myData}" th:object="${myDataForm}">
+        <div class="gridForm">
+            <div><label for="userId">User Id: </label></div>
+            <div><input style="background-color: #BBBBBB;"  th:field="*{userId}" type="text" name="userId" id="userId" maxlength="30"/></div>
+            <div><label for="name">Name: </label></div>
+            <div><input style="background-color: #BBBBBB;" th:field="*{name}" type="text" name="name" id="name" maxlength="30"/></div>
+            <div><label for="age">Age: </label></div>
+            <div><input style="background-color: #BBBBBB;" th:field="*{age}" type="text" name="age" id="age" min="0" max="999" maxlength="3"/></div>
+            <div><label for="password">Password: </label></div>
+            <div><input style="background-color: #BBBBBB;" th:field="*{password}" type="password" name="password" id="password" maxlength="30"/></div>
+            <div><label for="petname">Pet Name: </label></div>
+            <div><input style="background-color: #BBBBBB;" th:field="*{petName}" type="text" name="petname" id="petname" maxlength="30"/></div>
+            <div><label for="gender">Gender: </label></div>
+            <div>
+                <select name="gender" style="background-color: #BBBBBB;" th:field="*{gender}" id="gender">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+            </div>
+        </div>
+        <div>
+            <div label for="project">Project: </label></div>
+            <select th:each="project, loop : ${projectList}">
+                <option th:id="projectId+(${loop.index}+1)" th:text="${project.projectName}"></option>
+                </td>
+            </select>
+        </div>
+        <div></div>
+        <div>
+            <div label for="job">Role:</label></div>
+            <div>
+                <select name="job" style="background-color: #BBBBBB;" th:field="*{job}" id="job">
+                    <option value="Systems Analyst">Systems Analyst</option>
+                    <option value="Quality Assurance Tester">Quality Assurance Tester</option>
+                    <option value="Database Manager">Database Manager</option>
+                </select>
+            </div>
+        </div>
+        <div>
+            <div label for="band">Band:</label></div>
+            <div>
+                <select name="band" style="background-color: #BBBBBB;" th:field="*{band}" id="band">
+                    <option value="Systems Analyst">B1</option>
+                    <option value="Quality Assurance Tester">B2</option>
+                    <option value="Database Manager">B3</option>
+                </select>
+            </div>
+        </div>
+
+        <div><button id="register">Save</button></div>
+    </form>
+</div>
+
+<div id="error"><span th:if="${error}">User already exists</span></div>
+</div>
+</body>
+
+</html>

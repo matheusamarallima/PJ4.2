@@ -1,43 +1,43 @@
 package com.wipro.rp.skillmng.domain;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 public class Employee {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String id;
 	private String name;
-	private Gender gender;
+	private String gender;
 	private String petName;
 	private Integer age;
+	private String band;
+	private String job; //before : "role"
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_id")
 	private User user;
-	@ManyToOne //employee pode ter várias roles
-	@JoinColumn(name = "role_id")
-	private Role role;
-	@ManyToOne
-	@JoinColumn(name = "band_id")
-	private Band band;
+
+//	@ManyToOne //employee pode ter várias roles
+//	@JoinColumn(name = "role_id")
+//	private Role role;
+//	@ManyToOne
+//	@JoinColumn(name = "band_id")
+//	private Band band;
 
 	
 	public Employee() {}
-	
-	public Employee(
-			String id, String name, String petName, Integer age, Gender gender, Role role, Band band) {
+
+	public Employee(String id, String name, String gender, String petName, Integer age, String band, String job, User user) {
 		this.id = id;
 		this.name = name;
+		this.gender = gender;
 		this.petName = petName;
 		this.age = age;
-		this.gender = gender;
-		this.role = role;
 		this.band = band;
+		this.job = job;
+		this.user = user;
 	}
 
 	public String getId() {
@@ -48,20 +48,20 @@ public class Employee {
 		this.id = id;
 	}
 
-	public Gender getGender() {
-		return gender;
-	}
-
-	public void setGender(Gender gender) {
-		this.gender = gender;
-	}
-
 	public String getName() {
 		return name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 
 	public String getPetName() {
@@ -80,6 +80,22 @@ public class Employee {
 		this.age = age;
 	}
 
+	public String getBand() {
+		return band;
+	}
+
+	public void setBand(String band) {
+		this.band = band;
+	}
+
+	public String getJob() {
+		return job;
+	}
+
+	public void setJob(String job) {
+		this.job = job;
+	}
+
 	public User getUser() {
 		return user;
 	}
@@ -88,58 +104,16 @@ public class Employee {
 		this.user = user;
 	}
 
-	public Role getRole() {
-		return role;
-	}
-
-	public void setRole(Role role) {
-		this.role = role;
-	}
-
-	public Band getBand() {
-		return band;
-	}
-
-	public void setBand(Band band) {
-		this.band = band;
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Employee employee = (Employee) o;
+		return Objects.equals(id, employee.id) && Objects.equals(name, employee.name) && gender == employee.gender && Objects.equals(petName, employee.petName) && Objects.equals(age, employee.age) && Objects.equals(band, employee.band) && Objects.equals(job, employee.job) && Objects.equals(user, employee.user);
 	}
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((user == null) ? 0 : user.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (!(obj instanceof Employee)) {
-			return false;
-		}
-		
-		Employee other = (Employee) obj;
-		
-		if (id == null) {
-			if (other.id != null) {
-				return false;
-			}
-		} else if (!id.equals(other.id)) {
-			return false;
-		}
-
-		if (user == null) {
-			if (other.user != null) {
-				return false;
-			}
-		} else if (!user.equals(other.user)) {
-			return false;
-		}
-		
-		return true;
+		return Objects.hash(id, name, gender, petName, age, band, job, user);
 	}
 }

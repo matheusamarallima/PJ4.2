@@ -3,7 +3,7 @@
 	  xmlns:th="http://www.thymeleaf.org">
 
 	<head>
-		<title>Employee List</title>
+		<title>Project List</title>
 		<link rel="stylesheet" th:href="@{/css/skillMngStyle.css}">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<script th:src="@{/javascript/jquery.min.js}"></script>
@@ -35,13 +35,16 @@
 							<th>Project Name</th>
 							<th>Start Date</th>
 							<th>End Date</th>
-							<th>Action</th>
+							<th>Edit</th>
+							<th>Delete</th>
 						</tr>
 						<tr th:each="project, loop : ${projectList}">
 							<td><label th:id="projectId+(${loop.index}+1)" th:text="${project.projectId}">AAA</label></td>
 							<td><label th:id="projectName+(${loop.index}+1)" th:text="${project.projectName}"></label></td>
 							<td><label th:id="projectStartDate+(${loop.index}+1)" th:text="${project.projectStartDate}"></label></td>
 							<td><label th:id="projectEndDate+(${loop.index}+1)" th:text="${project.projectEndDate}"></label></td>
+							<td> <a th:href="@{edit/{projectName}(projectName=${project.projectName})}"><input id="edit" type="button" value="Edit" ></a></td>
+							<td> <a th:href="@{delete/{id}(id=${project.projectName})}"><input id="delete" type="button" value="Delete" ></a></td>
 <!--							<td><button th:id="deleteUser+(${loop.index}+1)" onclick="javascript: deleteEmployee(this)" th:value="${project.projectId}">Delete</button></td>-->
 						</tr>
 					</table>

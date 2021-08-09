@@ -31,9 +31,15 @@ public class ProjectCreationController {
         project1.setProjectName(projectDataForm.getProjectName());
         project1.setProjectStartDate(projectDataForm.getProjectStartDate());
         project1.setProjectEndDate(projectDataForm.getProjectEndDate());
+
+        if (projectRepository.findByProjectName(project1.getProjectName()) != null){
+            model.addAttribute("errorProject", projectRepository.findByProjectName(project1.getProjectName()));
+            return "projectcreation";
+        }
         project1 = projectRepository.save(project1);
+        model.addAttribute("success", "Project successfully added");
         System.out.println(project1.getProjectName() + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-        return "projectlist";
+        return "projectcreation";
     }
 
 }

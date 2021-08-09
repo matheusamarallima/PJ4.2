@@ -6,18 +6,18 @@ values(1, 'admin01', '$2a$10$yce69V8bfd3COZJJi6hBBepeGTzRYOEP52QTvFL9GZztz4fmW1Q
 
 
 
-delete from Role;
-insert into Role (id, name) values(1, 'Systems Analyst');
-insert into Role (id, name) values(2, 'Quality Assurance Tester');
-insert into Role (id, name) values(3, 'Database Manager');
+--delete from Role;
+--insert into Role (id, name) values(1, 'Systems Analyst');
+--insert into Role (id, name) values(2, 'Quality Assurance Tester');
+--insert into Role (id, name) values(3, 'Database Manager');
 
-
-
-delete from Band;
-insert into Band (id, description) values(1, 'B1');
-insert into Band (id, description) values(2, 'B2');
-insert into Band (id, description) values(3, 'B3');
-
+--
+--
+--delete from Band;
+--insert into Band (id, description) values(1, 'B1');
+--insert into Band (id, description) values(2, 'B2');
+--insert into Band (id, description) values(3, 'B3');
+--
 
 
 --delete from Skill;

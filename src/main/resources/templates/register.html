@@ -31,33 +31,41 @@
 					<div><label for="petname">Pet Name: </label></div>
 					<div><input style="background-color: #BBBBBB;" th:field="*{petName}" type="text" name="petname" id="petname" maxlength="30"/></div>
 					<div><label for="gender">Gender: </label></div>
-					<div>
-						<select style="background-color: #BBBBBB;" th:field="*{gender}" name="gender" id="gender">
-						    <option th:each="genderOpt : ${T(com.wipro.rp.skillmng.domain.Gender).values()}" 
-						        th:value="${genderOpt}" th:text="${genderOpt}"></option>
-						</select>				
+						<div>
+							<select name="gender" style="background-color: #BBBBBB;" th:field="*{gender}" id="gender">
+								<option value="Male">Male</option>
+								<option value="Female">Female</option>
+							</select>
+						</div>
 					</div>
-					<div><label for="role">Project: </label></div>
 					<div>
-						<select>
-						    <option>PRJ0001BR</option>
-						</select>
-					</div>
-					<div><label for="role">Role: </label></div>
-					<div>
-						<select style="background-color: #BBBBBB;" th:field="*{role}" name="role" id="role">
-						    <option th:each="roleOpt : ${roleList}" 
-						        th:value="${roleOpt.id}" th:text="${roleOpt.name}"></option>
-						</select>
-					</div>
-					<div><label for="band">Band: </label></div>
-					<div>
-						<select style="background-color: #BBBBBB;" th:field="*{band}" name="band" id="band">
-						    <option th:each="bandOpt : ${bandList}" 
-						        th:value="${bandOpt.id}" th:text="${bandOpt.description}"></option>
+						<div label for="project">Project: </label></div>
+						<select th:each="project, loop : ${projectList}">
+							<option th:id="projectId+(${loop.index}+1)" th:text="${project.projectName}"></option>
+							</td>
 						</select>
 					</div>
 					<div></div>
+					<div>
+						<div label for="job">Role:</label></div>
+						<div>
+							<select name="job" style="background-color: #BBBBBB;" th:field="*{job}" id="job">
+							<option value="Systems Analyst">Systems Analyst</option>
+							<option value="Quality Assurance Tester">Quality Assurance Tester</option>
+							<option value="Database Manager">Database Manager</option>
+							</select>
+						</div>
+					</div>
+					<div>
+						<div label for="band">Band:</label></div>
+						<div>
+							<select name="band" style="background-color: #BBBBBB;" th:field="*{band}" id="band">
+							<option value="Systems Analyst">B1</option>
+							<option value="Quality Assurance Tester">B2</option>
+							<option value="Database Manager">B3</option>
+							</select>
+						</div>
+					</div>
 					<div><button id="register">Save</button></div>
 				</div>
 			</form>

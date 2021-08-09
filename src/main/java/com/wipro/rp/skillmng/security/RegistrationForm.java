@@ -2,10 +2,9 @@ package com.wipro.rp.skillmng.security;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.wipro.rp.skillmng.domain.Band;
+
 import com.wipro.rp.skillmng.domain.Employee;
-import com.wipro.rp.skillmng.domain.Gender;
-import com.wipro.rp.skillmng.domain.Role;
+//import com.wipro.rp.skillmng.domain.Gender;
 import com.wipro.rp.skillmng.domain.User;
 
 public class RegistrationForm {
@@ -17,9 +16,9 @@ public class RegistrationForm {
 	private String password;
 	private String petName;
 	private Integer age;
-	private Gender gender;
-	private Role role;
-	private Band band;
+	private String gender;
+	private String job;
+	private String band;
 	
 	public User toUser(PasswordEncoder passwordEncoder) {
 		return new User(
@@ -29,8 +28,7 @@ public class RegistrationForm {
 	}
 	
 	public Employee toEmployee(User user) {
-		Employee employee = new Employee(
-				userId, name, petName, age, gender, role, band);
+		Employee employee = new Employee();
 		employee.setUser(user);
 		return employee;
 	}
@@ -75,27 +73,27 @@ public class RegistrationForm {
 		this.age = age;
 	}
 
-	public Gender getGender() {
+	public String getGender() {
 		return gender;
 	}
 
-	public void setGender(Gender gender) {
+	public void setGender(String gender) {
 		this.gender = gender;
 	}
 
-	public Role getRole() {
-		return role;
+	public String getJob() {
+		return job;
 	}
 
-	public void setRole(Role role) {
-		this.role = role;
+	public void setJob(String job) {
+		this.job = job;
 	}
 
-	public Band getBand() {
+	public String getBand() {
 		return band;
 	}
 
-	public void setBand(Band band) {
+	public void setBand(String band) {
 		this.band = band;
 	}
 }
