@@ -30,10 +30,6 @@ public class ProjectCreationController {
     public String projectCreationSave(Model model, ProjectDataForm projectDataForm, Project project ){
 
 
-//        if (projectRepository.findByProjectName(project1.getProjectName()) != null){
-//            model.addAttribute("errorProject", projectRepository.findByProjectName(project1.getProjectName()));
-//            return "projectcreation";
-//        }
         if(projectService.createProject(projectDataForm.DTOtoEntity(projectDataForm))){
             model.addAttribute("success", "Project successfully added");
 

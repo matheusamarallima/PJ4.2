@@ -38,10 +38,12 @@
 							</select>
 						</div>
 					</div>
-					<div>
+<!--				<select th:each="project, loop : ${projectList}">-->
+
+				<div>
 						<div label for="project">Project: </label></div>
-						<select th:each="project, loop : ${projectList}">
-							<option th:id="projectId+(${loop.index}+1)" th:text="${project.projectName}"></option>
+							 <select>
+							<option th:each="${project.projectName}"></option>
 							</td>
 						</select>
 					</div>
@@ -67,7 +69,6 @@
 						</div>
 					</div>
 					<div><button id="register">Save</button></div>
-				</div>
 			</form>
 			<div id="error"><span th:if="${error}">User already exists</span></div>
 		</div>

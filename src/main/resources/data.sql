@@ -5,6 +5,12 @@ insert into User (id, username, password, role)
 values(1, 'admin01', '$2a$10$yce69V8bfd3COZJJi6hBBepeGTzRYOEP52QTvFL9GZztz4fmW1Q66', 'ROLE_ADMIN');
 
 
+insert into Project(id, project_id, project_name, project_start_date, project_end_date)
+values(1, 'PWP', 'Projeto wipro 1', '12/12/20', '25/12/2021');
+insert into Project(id, project_id, project_name, project_start_date, project_end_date)
+values(2, 'PWP2', 'Projeto wipro 2', '12/12/20', '25/12/2021');
+insert into Project(id, project_id, project_name, project_start_date, project_end_date)
+values(3, 'PWP3', 'Projeto wipro 3', '12/12/20', '25/12/2021');
 
 --delete from Role;
 --insert into Role (id, name) values(1, 'Systems Analyst');

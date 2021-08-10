@@ -32,7 +32,7 @@
             <div><button id="register">Save</button></div>
         </div>
     </form>
-    <div class="main">
+    <div id="error"><span th:if="${employeeList}">Project already exists
         <h3>Employee List</h3>
         <div>
             </form>
@@ -44,14 +44,14 @@
 
                 </tr>
                 <tr th:each="employee, loop : ${employeeList}">
-                    <td><label th:id="userName+(${loop.index}+1)" th:text="${employee.name}"></label></td>
-                    <td><label th:id="role+(${loop.index}+1)" th:text="${employee.role.name}"></label></td>
-                    <td><label th:id="band+(${loop.index}+1)" th:text="${employee.band.description}"></label></td>
+                    <td><label th:id="name+(${loop.index}+1)" th:text="${employee.name}"></label></td>
+                    <td><label th:id="role+(${loop.index}+1)" th:text="${employee.job}"></label></td>
+                    <td><label th:id="band+(${loop.index}+1)" th:text="${employee.band}"></label></td>
                 </tr>
             </table>
             <!--					class="btn btn-primary btn-sm mb-3"-->
         </div>
-    </div>
+    </span></div>
 
 </div>
 
