@@ -1,7 +1,7 @@
 package com.wipro.rp.skillmng.web;
 
 import com.wipro.rp.skillmng.data.EmployeeRepository;
-import com.wipro.rp.skillmng.servicwe.MyDataForm;
+import com.wipro.rp.skillmng.service.MyDataForm;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

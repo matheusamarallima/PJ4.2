@@ -13,20 +13,19 @@ public class Project {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long Id;
+    private Long id;
     private String projectId;
     private String projectName;
     private String projectStartDate;
     private String projectEndDate;
-    @OneToMany(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "employee")
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "employee_id")
     private List<Employee> employeeList;
 
     public Project() {
     }
 
-    public Project(long id, String projectId, String projectName, String projectStartDate, String projectEndDate, List<Employee> employeeList) {
-        Id = id;
+    public Project(String projectId, String projectName, String projectStartDate, String projectEndDate, List<Employee> employeeList) {
         this.projectId = projectId;
         this.projectName = projectName;
         this.projectStartDate = projectStartDate;
@@ -34,12 +33,19 @@ public class Project {
         this.employeeList = employeeList;
     }
 
-    public long getId() {
-        return Id;
+    public Project(String projectId, String projectName, String projectStartDate, String projectEndDate) {
+        this.projectId = projectId;
+        this.projectName = projectName;
+        this.projectStartDate = projectStartDate;
+        this.projectEndDate = projectEndDate;
     }
 
-    public void setId(long id) {
-        Id = id;
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getProjectId() {
@@ -87,11 +93,11 @@ public class Project {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Project project = (Project) o;
-        return Id == project.Id && Objects.equals(projectId, project.projectId) && Objects.equals(projectName, project.projectName) && Objects.equals(projectStartDate, project.projectStartDate) && Objects.equals(projectEndDate, project.projectEndDate) && Objects.equals(employeeList, project.employeeList);
+        return Objects.equals(id, project.id) && Objects.equals(projectId, project.projectId) && Objects.equals(projectName, project.projectName) && Objects.equals(projectStartDate, project.projectStartDate) && Objects.equals(projectEndDate, project.projectEndDate) && Objects.equals(employeeList, project.employeeList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(Id, projectId, projectName, projectStartDate, projectEndDate, employeeList);
+        return Objects.hash(id, projectId, projectName, projectStartDate, projectEndDate, employeeList);
     }
 }

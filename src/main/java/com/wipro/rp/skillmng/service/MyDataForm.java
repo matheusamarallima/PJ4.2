@@ -1,4 +1,4 @@
-package com.wipro.rp.skillmng.servicwe;
+package com.wipro.rp.skillmng.service;
 
 public class MyDataForm {
 

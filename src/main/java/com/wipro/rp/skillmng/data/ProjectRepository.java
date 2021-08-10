@@ -2,14 +2,17 @@ package com.wipro.rp.skillmng.data;
 
 import com.wipro.rp.skillmng.domain.Project;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+
 
 import java.util.List;
+import java.util.Optional;
 
-@Repository
-public interface ProjectRepository extends CrudRepository<Project, String> {
 
-    public List<Project> findAll();
+public interface ProjectRepository extends CrudRepository<Project, Long> {
 
-    public Project findByProjectName(String projectName);
+    List<Project> findAll();
+
+    Optional<Project> findByProjectName(String projectName);
+
+
 }

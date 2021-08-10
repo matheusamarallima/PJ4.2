@@ -26,7 +26,7 @@ create table if not exists Project(
 --);
 
 create table if not exists Employee(
-	id varchar(30) not null primary key auto_increment,
+	id bigint not null primary key auto_increment,
 	name varchar(30),
 	user_id bigint not null,
 	gender varchar(6) not null,

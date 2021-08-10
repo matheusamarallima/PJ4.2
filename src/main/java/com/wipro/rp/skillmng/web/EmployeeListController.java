@@ -28,8 +28,8 @@ public class EmployeeListController {
 	@PostMapping("/employeelist")
 	public String deleteEmployee(
 			Model model, 
-			@RequestParam(name = "deleteUserId", required = true) String deleteUserId) {
-		String deleteEmployeeId = deleteUserId;
+			@RequestParam(name = "deleteUserId", required = true) Long deleteUserId) {
+		Long deleteEmployeeId = deleteUserId;
 		employeeRepo.deleteById(deleteEmployeeId);
 		Iterable<Employee> employees = employeeRepo.findAllByOrderByName();
 		model.addAttribute("employeeList", employees);

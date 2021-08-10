@@ -8,7 +8,7 @@ public class Employee {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String id;
+	private Long id;
 	private String name;
 	private String gender;
 	private String petName;
@@ -29,7 +29,7 @@ public class Employee {
 	
 	public Employee() {}
 
-	public Employee(String id, String name, String gender, String petName, Integer age, String band, String job, User user) {
+	public Employee(Long id, String name, String gender, String petName, Integer age, String band, String job, User user) {
 		this.id = id;
 		this.name = name;
 		this.gender = gender;
@@ -40,11 +40,11 @@ public class Employee {
 		this.user = user;
 	}
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -109,7 +109,7 @@ public class Employee {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		Employee employee = (Employee) o;
-		return Objects.equals(id, employee.id) && Objects.equals(name, employee.name) && gender == employee.gender && Objects.equals(petName, employee.petName) && Objects.equals(age, employee.age) && Objects.equals(band, employee.band) && Objects.equals(job, employee.job) && Objects.equals(user, employee.user);
+		return Objects.equals(id, employee.id) && Objects.equals(name, employee.name) && Objects.equals(gender, employee.gender) && Objects.equals(petName, employee.petName) && Objects.equals(age, employee.age) && Objects.equals(band, employee.band) && Objects.equals(job, employee.job) && Objects.equals(user, employee.user);
 	}
 
 	@Override

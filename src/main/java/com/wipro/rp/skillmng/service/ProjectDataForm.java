@@ -1,4 +1,4 @@
-package com.wipro.rp.skillmng.servicwe;
+package com.wipro.rp.skillmng.service;
 
 import com.wipro.rp.skillmng.domain.Project;
 
@@ -9,7 +9,10 @@ public class ProjectDataForm {
     private String projectStartDate;
     private String projectEndDate;
 
+    public Project DTOtoEntity(ProjectDataForm projectDataForm){
+        return new Project(projectDataForm.getProjectId(), projectDataForm.getProjectName(), projectDataForm.getProjectStartDate(), projectDataForm.getProjectEndDate());
 
+    }
 
     public String getProjectId() {
         return projectId;
