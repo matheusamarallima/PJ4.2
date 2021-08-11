@@ -1,5 +1,5 @@
-delete from User;
-delete from Employee;
+--delete from User;
+--delete from Employee;
 
 insert into User (id, username, password, role)
 values(1, 'admin01', '$2a$10$yce69V8bfd3COZJJi6hBBepeGTzRYOEP52QTvFL9GZztz4fmW1Q66', 'ROLE_ADMIN');

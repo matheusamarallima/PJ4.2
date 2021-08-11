@@ -13,9 +13,10 @@ import javax.persistence.InheritanceType;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+//@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class User 
 	implements UserDetails{
 
@@ -27,7 +28,10 @@ public class User
 	private String username;
 	private String password;
 	private String role;
-	
+
+
+
+
 	public User() {}
 	
 	public User(String username, String password, String role) {
@@ -35,6 +39,7 @@ public class User
 		this.password = password;
 		this.role = role;
 	}
+
 
 	public String getRole() {
 		return role;

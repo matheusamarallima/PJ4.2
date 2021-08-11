@@ -10,7 +10,9 @@ public class ProjectDataForm {
     private String projectEndDate;
 
     public Project DTOtoEntity(ProjectDataForm projectDataForm){
-        return new Project(projectDataForm.getProjectId(), projectDataForm.getProjectName(), projectDataForm.getProjectStartDate(), projectDataForm.getProjectEndDate());
+        return new Project(projectDataForm.getProjectId(),
+                projectDataForm.getProjectName(), projectDataForm.getProjectStartDate(),
+                projectDataForm.getProjectEndDate());
 
     }
 

@@ -18,6 +18,10 @@ public class Employee {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_id")
 	private User user;
+	@ManyToOne
+	@JoinColumn(name = "project_id")
+	private Project project;
+
 
 //	@ManyToOne //employee pode ter várias roles
 //	@JoinColumn(name = "role_id")
@@ -29,8 +33,8 @@ public class Employee {
 	
 	public Employee() {}
 
-	public Employee(Long id, String name, String gender, String petName, Integer age, String band, String job, User user) {
-		this.id = id;
+	public Employee(String name, String gender, String petName,
+					Integer age, String band, String job, User user, Project project) {
 		this.name = name;
 		this.gender = gender;
 		this.petName = petName;
@@ -38,6 +42,7 @@ public class Employee {
 		this.band = band;
 		this.job = job;
 		this.user = user;
+		this.project = project;
 	}
 
 	public Long getId() {
@@ -102,6 +107,14 @@ public class Employee {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
 	}
 
 	@Override

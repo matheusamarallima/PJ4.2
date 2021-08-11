@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.wipro.rp.skillmng.data.EmployeeRepository;
 import com.wipro.rp.skillmng.domain.Employee;
 
+import java.util.List;
+
 @Controller
 public class EmployeeListController {
 	
@@ -20,9 +22,9 @@ public class EmployeeListController {
 
 	@GetMapping("/employeelist")
 	public String employeeList(Model model) {
-		Iterable<Employee> employees = employeeRepo.findAllByOrderByName();
+		List<Employee> employees = employeeRepo.findAllByOrderByName();
 		model.addAttribute("employeeList", employees);
-		return "projectlist";
+		return "employeelist";
 	}
 
 	@PostMapping("/employeelist")
@@ -33,6 +35,6 @@ public class EmployeeListController {
 		employeeRepo.deleteById(deleteEmployeeId);
 		Iterable<Employee> employees = employeeRepo.findAllByOrderByName();
 		model.addAttribute("employeeList", employees);
-		return "projectlist";
+		return "employeelist";
 	}
 }

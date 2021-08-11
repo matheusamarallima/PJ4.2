@@ -1,6 +1,6 @@
 create table if not exists User(
 	id bigint not null primary key auto_increment,
-	username varchar(100) not null,
+	username varchar(100),
 	password varchar(100) not null,
 	role varchar(13) not null
 );
@@ -33,8 +33,13 @@ create table if not exists Employee(
 	pet_name varchar(50) not null,
 	job varchar(50) not null,
 	band varchar(50) not null,
-	age int not null
+	age int not null,
+	project_id bigint not null
 );
+
+alter table Employee
+  add foreign key (project_id) references Project(id);
+
 
 alter table Employee
   add foreign key (user_id) references User(id);

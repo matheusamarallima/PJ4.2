@@ -29,7 +29,7 @@
 			<div class="main">
 				<h3>Employee List</h3>
 				<div>
-					<form name="deleteForm" id="deleteForm" method="post" th:action="@{employeelist}" th:hidden="true">
+					<form name="deleteForm" id="deleteForm" method="post" th:action="@{employeeList}" th:hidden="true">
 						<input type="hidden" id="deleteUserId" th:name="deleteUserId" />
 					</form>				
 					<table>
@@ -40,9 +40,9 @@
 
 						</tr>
 						<tr th:each="employee, loop : ${employeeList}">
-							<td><label th:id="userName+(${loop.index}+1)" th:text="${employee.name}"></label></td>
-							<td><label th:id="role+(${loop.index}+1)" th:text="${employee.role.name}"></label></td>
-							<td><label th:id="band+(${loop.index}+1)" th:text="${employee.band.description}"></label></td>
+							<td><label th:text="${employee.name}"></label></td>
+							<td><label th:text="${employee.job}"></label></td>
+							<td><label th:text="${employee.band}"></label></td>
 						</tr>
 					</table>
 <!--					class="btn btn-primary btn-sm mb-3"-->

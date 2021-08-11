@@ -1,5 +1,8 @@
-package com.wipro.rp.skillmng.security;
+package com.wipro.rp.skillmng.service;
 
+import com.wipro.rp.skillmng.data.UserRepository;
+import com.wipro.rp.skillmng.domain.Project;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 
@@ -9,8 +12,12 @@ import com.wipro.rp.skillmng.domain.User;
 
 public class RegistrationForm {
 	
-	private static final String ROLE_EMPLOYEE = "ROLE_EMPLOYEE"; 
-	
+	private static final String ROLE_EMPLOYEE = "ROLE_EMPLOYEE";
+
+//	UserRepository userRepository;
+
+
+
 	private String userId;
 	private String name;
 	private String password;
@@ -19,18 +26,48 @@ public class RegistrationForm {
 	private String gender;
 	private String job;
 	private String band;
-	
-	public User toUser(PasswordEncoder passwordEncoder) {
+	private Project project;
+	private User user;
+
+
+	public Employee DTOtoEntity(Employee employee){
+		return new Employee(employee.getName(),
+				employee.getGender(), employee.getPetName(),
+				employee.getAge(), employee.getBand(), employee.getJob(),
+				toUser(employee.getUser()),employee.getProject());
+
+	}
+//	public RegistrationForm(UserRepository userRepository) {
+//		this.userRepository = userRepository;
+//	}
+
+
+
+	public User toUser(User user) {
+
 		return new User(
 					userId,
-					passwordEncoder.encode(password),
+					encodePassword(user.getPassword()),
 					ROLE_EMPLOYEE);
 	}
-	
+
+	private String encodePassword(String password) {
+		return new BCryptPasswordEncoder().encode(password);
+	}
+
+
 	public Employee toEmployee(User user) {
 		Employee employee = new Employee();
 		employee.setUser(user);
 		return employee;
+	}
+
+	public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
 	}
 
 	public String getUserId() {
@@ -96,4 +133,12 @@ public class RegistrationForm {
 	public void setBand(String band) {
 		this.band = band;
 	}
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 }
