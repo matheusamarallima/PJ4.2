@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Registration</title>
+    <title>My Data</title>
     <link rel="stylesheet" th:href="@{/css/skillMngStyle.css}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script th:src="@{/javascript/jquery.min.js}"></script>
@@ -16,7 +16,7 @@
 </head>
 <body>
 <div class="container">
-    <h3>Employee Data</h3>
+    <h3>My Data</h3>
     <hr/>
     <form method="POST" id="myData" th:action="@{/myData}" th:object="${myDataForm}">
         <div class="gridForm">

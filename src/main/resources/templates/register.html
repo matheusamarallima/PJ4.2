@@ -37,7 +37,7 @@
 								<option value="Female">Female</option>
 							</select>
 						</div>
-				<div label for="project">Project Name</label>
+					<div label for="project">Project Name</label>
 					<select th:name="project.projectName" input style="background-color: #BBBBBB;">
 						<option th:value="${project.projectName}" th:each="project, loop : ${projectList}" th:text="${project.projectName}" ></option>
 					</select>
@@ -57,9 +57,9 @@
 						<div label for="band">Band:</label></div>
 						<div>
 							<select name="band" style="background-color: #BBBBBB;" th:name="band" id="band">
-							<option value="Systems Analyst">B1</option>
-							<option value="Quality Assurance Tester">B2</option>
-							<option value="Database Manager">B3</option>
+							<option value="B1">B1</option>
+							<option value="B3">B2</option>
+							<option value="B2">B3</option>
 							</select>
 						</div>
 					</div>
