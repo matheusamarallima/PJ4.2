@@ -15,7 +15,7 @@
 			<div>
 				<h3>Login</h3>
 				<hr/>
-				<form class="gridForm" id="loginForm" method="POST" th:action="@{login}">
+				<form class="gridForm" id="loginForm" method="POST" th:action="@{login}" th:object="@{loginForm}">
 					<div><label for="userId">User Id: </label></div>
 					<div><input type="text" name="userId" id="userId" /></div>
 					<div><label for="password">Password: </label></div>
