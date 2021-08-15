@@ -41,7 +41,7 @@ public class EditForm {
     public User toUser(User user) {
 
         return new User(
-                userId,
+                user.getUsername(),
                 encodePassword(user.getPassword()),
                 ROLE_EMPLOYEE);
     }

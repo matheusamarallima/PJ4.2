@@ -19,13 +19,13 @@ public class UserRepositoryUserDetailsService
 	}
 	
 	@Override
-	public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
-		User user = userRepo.findUserByUsername(userId);
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		User user = userRepo.findUserByUsername(username);
 		if(user != null) {
 			return user;
 		}
 		throw new UsernameNotFoundException(
-				"User '" + userId + "' not found!");
+				"User '" + username + "' not found!");
 	}
 
 }

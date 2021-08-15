@@ -14,13 +14,10 @@ public class RegistrationForm {
 	
 	private static final String ROLE_EMPLOYEE = "ROLE_EMPLOYEE";
 
-//	UserRepository userRepository;
 
 
 
-	private String userId;
 	private String name;
-	private String password;
 	private String petName;
 	private Integer age;
 	private String gender;
@@ -29,15 +26,32 @@ public class RegistrationForm {
 	private Project project;
 	private User user;
 
+	public RegistrationForm() {
+
+	}
+
 
 	public Employee DTOtoEntity(Employee employee){
 		return new Employee(employee.getName(),
 				employee.getGender(), employee.getPetName(),
 				employee.getAge(), employee.getBand(), employee.getJob(),
-				toUser(employee.getUser()),employee.getProject());
+				toUser(employee.getUser()),
+				employee.getProject());
 
 	}
-//	public RegistrationForm(UserRepository userRepository) {
+
+	public RegistrationForm(String name, String petName, Integer age, String gender, String job, String band, Project project, User user) {
+		this.name = name;
+		this.petName = petName;
+		this.age = age;
+		this.gender = gender;
+		this.job = job;
+		this.band = band;
+		this.project = project;
+		this.user = user;
+	}
+
+	//	public RegistrationForm(UserRepository userRepository) {
 //		this.userRepository = userRepository;
 //	}
 
@@ -46,14 +60,15 @@ public class RegistrationForm {
 	public User toUser(User user) {
 
 		return new User(
-					userId,
-					encodePassword(user.getPassword()),
-					ROLE_EMPLOYEE);
+				user.getUsername(),
+				new BCryptPasswordEncoder().encode(String.valueOf(user.getPassword())),
+				ROLE_EMPLOYEE);
 	}
 
-	private String encodePassword(String password) {
-		return new BCryptPasswordEncoder().encode(password);
-	}
+//
+//	private static String encodePassword(String password) {
+//		return new BCryptPasswordEncoder().encode(password);
+//	}
 
 
 	public Employee toEmployee(User user) {
@@ -70,13 +85,6 @@ public class RegistrationForm {
 		this.project = project;
 	}
 
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
 
 	public String getName() {
 		return name;
@@ -84,14 +92,6 @@ public class RegistrationForm {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 	public String getPetName() {
@@ -133,6 +133,7 @@ public class RegistrationForm {
 	public void setBand(String band) {
 		this.band = band;
 	}
+
 	public User getUser() {
 		return user;
 	}

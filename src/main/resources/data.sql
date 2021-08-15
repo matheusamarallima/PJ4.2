@@ -5,7 +5,7 @@ insert into User (id, username, password, role)
 values(1, 'admin01', '$2a$10$yce69V8bfd3COZJJi6hBBepeGTzRYOEP52QTvFL9GZztz4fmW1Q66', 'ROLE_ADMIN');
 
 insert into User (id, username, password, role)
-values(2, 'Matheus', '$2a$10$yce69V8bfd3COZJJi6hBBepeGTzRYOEP52QTvFL9GZztz4fmW1Q66', 'ROLE_EMPLOYEE');
+values(2, 'Mock123', 'Matheus1@', 'ROLE_EMPLOYEE');
 
 
 

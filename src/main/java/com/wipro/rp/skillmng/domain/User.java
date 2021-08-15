@@ -2,6 +2,7 @@ package com.wipro.rp.skillmng.domain;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,8 +16,9 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-@Entity
+
 //@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Entity
 public class User 
 	implements UserDetails{
 
@@ -29,11 +31,9 @@ public class User
 	private String password;
 	private String role;
 
+	public User() {
+	}
 
-
-
-	public User() {}
-	
 	public User(String username, String password, String role) {
 		this.username = username;
 		this.password = password;
@@ -55,8 +55,8 @@ public class User
 
 	public void setId(Long id) {
 		this.id = id;
-	}	
-	
+	}
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return Arrays.asList(new SimpleGrantedAuthority(this.role));
@@ -112,13 +112,13 @@ public class User
 		if (this == obj) {
 			return true;
 		}
-		
+
 		if (!(obj instanceof User)) {
 			return false;
 		}
-		
+
 		User other = (User) obj;
-		
+
 		if (id == null) {
 			if (other.id != null) {
 				return false;
@@ -126,7 +126,7 @@ public class User
 		} else if (!id.equals(other.id)) {
 			return false;
 		}
-		
+
 		if (username == null) {
 			if (other.username != null) {
 				return false;

@@ -3,18 +3,29 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Employee Data</title>
+    <title>Employee List</title>
     <link rel="stylesheet" th:href="@{/css/skillMngStyle.css}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script th:src="@{/javascript/jquery.min.js}"></script>
     <script th:src="@{/javascript/skillMngJQ.js}"></script>
-    <style>
-			.gridForm input, .gridForm select{
-				width: 200px;
-			}
-		</style>
 </head>
+
 <body>
+    <div class="container">
+        <div class="menu">
+        <ul>
+            <!--					sec:authorize="hasRole('ADMIN')"-->
+            <li><a th:href="@{/home}">Home</a></li>
+            <li><a th:href="@{/skillsearch}">Skill Search</a></li>
+            <li ><a th:href="@{/employeelist}">Employee List</a></li>
+            <li>
+                <form name="logoutForm" id="logoutForm" method="post" th:action="@{logout}" th:hidden="true">
+                    <input type="submit" value="Logout"/>
+                </form>
+                <a id="logOutLink">Logout</a><br/>
+            </li>
+        </ul>
+        </div>
 <div class="container">
     <h3>Employee Data</h3>
     <hr/>
@@ -64,7 +75,10 @@
                 </div>
             </div>
             <div><button id="Save">Save</button></div>
-            <div id="error"><span th:if="${success}">User already exists</span></div>
+            <div id="error"><span th:if="${success}">User edited</span></div>
+
+
+
 
         </div>
     </form>

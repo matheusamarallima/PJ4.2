@@ -1,33 +1,33 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	  xmlns:th="http://www.thymeleaf.org">
-	
-	<head>
-		<title>Login</title>
-		<link rel="stylesheet" th:href="@{/css/skillMngStyle.css}">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<script th:src="@{/javascript/jquery.min.js}"></script>
-		<script th:src="@{/javascript/skillMngJQ.js}"></script>
-	</head>
-	<body>
-		<div class="container">
-			<div id="message"><span th:if="${param.success}" th:text="${successMessage}"></span></div>
-			<div>
-				<h3>Login</h3>
-				<hr/>
-				<form class="gridForm" id="loginForm" method="POST" th:action="@{login}" th:object="@{loginForm}">
-					<div><label for="userId">User Id: </label></div>
-					<div><input type="text" name="userId" id="userId" /></div>
-					<div><label for="password">Password: </label></div>
-					<div><input type="password" name="password" id="password" /><br><br></div>
-					<div><a id="forgotPassword" th:href="@{/forgotpassword}">Forgot Password</a></div>
-					<div><a id="register" th:href="@{/register}">Register</a><br><br></div>
-					<div></div>
-					<div><input type="button" id="login" name="login" value="Login"/></div>
-				</form>	
-			</div>
-			<div id="error"><span th:if="${param.error}">Invalid Login Credentials</span></div>
-		</div>
-	</body>
-	
+
+<head>
+	<title>Login</title>
+	<link rel="stylesheet" th:href="@{/css/skillMngStyle.css}">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script th:src="@{/javascript/jquery.min.js}"></script>
+	<script th:src="@{/javascript/skillMngJQ.js}"></script>
+</head>
+<body>
+<div class="container">
+	<div id="message"><span th:if="${param.success}" th:text="${successMessage}"></span></div>
+	<div>
+		<h3>Login</h3>
+		<hr/>
+		<form class="gridForm" id="loginForm" method="POST" th:action="@{login}">
+			<div><label for="username">User Id: </label></div>
+			<div><input type="text" name="username" id="username"/></div>
+			<div><label for="password">Password: </label></div>
+			<div><input type="password" name="password" id="password" /><br><br></div>
+			<div><a id="forgotPassword" th:href="@{/forgotpassword}">Forgot Password</a></div>
+			<div><a id="register" th:href="@{/register}">Register</a><br><br></div>
+			<div></div>
+			<div><input type="button" id="login" name="login" value="Login"/></div>
+		</form>
+	</div>
+	<div id="error"><span th:if="${param.error}">Invalid Login Credentials</span></div>
+</div>
+</body>
+
 </html>
