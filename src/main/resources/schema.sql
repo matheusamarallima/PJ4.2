@@ -15,15 +15,7 @@ create table if not exists Project(
 
 );
 
---create table if not exists Role(
---	id bigint not null primary key auto_increment,
---	name varchar(100) not null
---);
---
---create table if not exists Band(
---	id bigint not null primary key auto_increment,
---	description varchar(100) not null
---);
+
 
 create table if not exists Employee(
 	id bigint not null primary key auto_increment,
@@ -44,14 +36,26 @@ alter table Employee
 alter table Employee
   add foreign key (user_id) references User(id);
 
+
+alter table Project
+add foreign key (employee_id) references Employee(id);
+
+--create table if not exists Role(
+--	id bigint not null primary key auto_increment,
+--	name varchar(100) not null
+--);
+--
+--create table if not exists Band(
+--	id bigint not null primary key auto_increment,
+--	description varchar(100) not null
+--);
+
 --alter table Employee
 --  add foreign key (role_id) references Role(id);
 --
 --alter table Employee
 --  add foreign key (band_id) references Band(id);
 
-alter table Project
-add foreign key (employee_id) references Employee(id);
 
 --create table if not exists Skill(
 --	id varchar(5) not null primary key,

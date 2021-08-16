@@ -1,8 +1,9 @@
 package com.wipro.rp.skillmng.service;
 
 import com.wipro.rp.skillmng.data.EmployeeRepository;
+import com.wipro.rp.skillmng.data.UserRepository;
 import com.wipro.rp.skillmng.domain.Employee;
-import com.wipro.rp.skillmng.domain.Project;
+import com.wipro.rp.skillmng.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,11 +13,13 @@ import java.util.Optional;
 public class EmployeeService {
 
     private final EmployeeRepository employeeRepository;
+    private final UserRepository userRepository;
 
     @Autowired
 
-    public EmployeeService(EmployeeRepository employeeRepository) {
+    public EmployeeService(EmployeeRepository employeeRepository, UserRepository userRepository) {
         this.employeeRepository = employeeRepository;
+        this.userRepository = userRepository;
     }
 
     public boolean createEmployee(Employee employee) {
@@ -31,12 +34,13 @@ public class EmployeeService {
         employeeRepository.delete(employee);
     }
 
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Employee findEmployeeByName(String name) {
         Optional<Employee> employee = employeeRepository.findByName(name);
         return employee.orElse(null);//retorna ou o projeto ou ele retorna nulo
         //caso ela coloque algo q n exista, ele trata para não quebrar o código
     }
+
 
     public Employee findEmployeeById(Long id) {
         Optional<Employee> employee = employeeRepository.findById(id);
@@ -52,6 +56,12 @@ public class EmployeeService {
         }
         return false;
     }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+//    public User findEmployeeByUsername(String username) {
+//        Optional<User> employee = userRepository.findEmployeeByUsername(username);
+//        return employee.orElse(null);//retorna ou o projeto ou ele retorna nulo
+//        //caso ela coloque algo q n exista, ele trata para não quebrar o código
+//    }
 
 }

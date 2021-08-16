@@ -31,29 +31,26 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
 			.userDetailsService(userDetailsService)
 			.passwordEncoder(encoder());
 	}
-	
+
 	@Override
-	protected void configure(HttpSecurity http) 
-		throws Exception{
+	protected void configure(HttpSecurity http)
+			throws Exception{
 		final String loginURL = "/login";
 		http
-			.authorizeRequests()
+				.authorizeRequests()
 				.antMatchers("/css/**", "/images/**", "/javascript/**", "/forgotpassword/**",
 						loginURL, "/register", "/forgotpassword")
-					.permitAll()
+				.permitAll()
 //				.antMatchers("/**")
 //					.hasAnyRole("ADMIN", "EMPLOYEE")
-				.and().csrf().disable()
-				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-				.and().headers().frameOptions().sameOrigin()
-			.and()
+				.and()
 				.formLogin()
-					.loginPage(loginURL)
-					.defaultSuccessUrl("/loginSuccess", true)
-					.usernameParameter("username")
-					.permitAll()
-					.and()
-						.logout()
-							.logoutSuccessUrl(loginURL);
+				.loginPage(loginURL)
+				.defaultSuccessUrl("/loginSuccess", true)
+				.usernameParameter("username")
+				.permitAll()
+				.and()
+				.logout()
+				.logoutSuccessUrl(loginURL);
 	}
 }

@@ -15,21 +15,23 @@ import org.springframework.web.bind.annotation.*;
 
 import com.wipro.rp.skillmng.domain.User;
 
+import java.security.Principal;
 
-//@SessionAttributes({"loginForm"})
+
+//@SessionAttributes({"username"})
 @Controller
 public class LoginController {
 
-//	private EmployeeRepository employeeRepo;
-//	private EmployeeService employeeService;
-//	private ProjectRepository projectRepository;
-//
-//	@Autowired
-//	public LoginController(EmployeeRepository employeeRepo, EmployeeService employeeService, ProjectRepository projectRepository) {
-//		this.employeeRepo = employeeRepo;
-//		this.employeeService = employeeService;
-//		this.projectRepository = projectRepository;
-//	}
+	private EmployeeRepository employeeRepo;
+	private EmployeeService employeeService;
+	private ProjectRepository projectRepository;
+
+	@Autowired
+	public LoginController(EmployeeRepository employeeRepo, EmployeeService employeeService, ProjectRepository projectRepository) {
+		this.employeeRepo = employeeRepo;
+		this.employeeService = employeeService;
+		this.projectRepository = projectRepository;
+	}
 
 
 	@GetMapping("/login")
@@ -53,19 +55,29 @@ public class LoginController {
 		if(user != null) {
 			String roles = user.getAuthorities().toString();
 			if(roles.contains("ROLE_EMPLOYEE")) {
-				return "redirect:/employeesearch";
+				return "redirect:/home";
 			} else if(roles.contains("ROLE_ADMIN")){
 				return "redirect:/home";
 			}
 		}
 		return "redirect:/login";
 	}
+
+
+
 //
-//	@GetMapping("mydata/{id}")
+//	@GetMapping("/mydata/{username}")
+//	public String editEmployee(@PathVariable("username") String username, Model model){
+//		employeeService.editEmployee();
+//		model.addAttribute("username", username);
+//		return "redirect:/employeedata/{username}";
+//	}
+//
+//	@GetMapping("mydata/{username}")
 //	public String processEdit(Model model,
-//							  @SessionAttribute("id") Employee employee,
+//							  @SessionAttribute("username") Employee employee,
 //							  EditForm editForm) {
-//		employee = employeeRepo.findById(employee.getId()).get();
+//		employee = employeeService.findEmployeeByUsername();
 //		Project project = projectRepository.findByProjectName(employee.getProject().getProjectName()).get();
 //
 //
@@ -78,9 +90,9 @@ public class LoginController {
 //
 //	@PostMapping("/mydata/save")
 //	public String saveEditEmployee(Model model, EditForm editForm,
-//								   @SessionAttribute("id") Employee employee){
-//		Employee employee1 = employeeRepo.findById(employee.getId()).get();
-//		employeeRepo.delete(employeeService.findEmployeeById(employee.getId()));
+//								   @SessionAttribute("username") Employee employee){
+//		Employee employee1 = employeeRepo.findByUsername(employee.getUser().getUsername()).get();
+//		employeeRepo.delete(employeeService.findEmployeeByUsername(employee.getUser().getUsername()));
 //		model.addAttribute("employee", employee1);
 //		employee1.setProject(employee.getProject());
 //		employee1 = editForm.DTOtoEntity(employee1);

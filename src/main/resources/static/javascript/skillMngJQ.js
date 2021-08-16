@@ -71,7 +71,7 @@ $(document).ready(function(){
 		$("#login").click(function(){
 
 			let message = "";
-			let userIdPage = $("#userId").val().trim();
+			let userIdPage = $("#username").val().trim();
 			let passwordPage = $("#password").val().trim();
 
 			message += testUserId(userIdPage);

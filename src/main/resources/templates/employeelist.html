@@ -28,20 +28,23 @@
 		</ul>
 	</div>
 	<div class="main">
-		<h3>Project List</h3>
+		<h3>Employee List</h3>
 		<table border="1">
 			<tr>
 				<th>Employee Id</th>
 				<th>Employee Name</th>
 				<th>Role</th>
 				<th>Band</th>
+				<th>Project</th>
 				<th>Edit</th>
 				<th>Delete</th>
 			</tr>
 			<tr th:each="employee, loop : ${employeeList}">
-				<td><label th:id="projectId+(${loop.index}+1)" th:text="${employee.name}">AAA</label></td>
-				<td><label th:id="projectName+(${loop.index}+1)" th:text="${employee.job}"></label></td>
-				<td><label th:id="projectStartDate+(${loop.index}+1)" th:text="${employee.band}"></label></td>
+				<td><label th:text="${employee.id}"></label></td>
+				<td><label th:text="${employee.name}"></label></td>
+				<td><label th:text="${employee.job}"></label></td>
+				<td><label th:text="${employee.band}"></label></td>
+				<td><label th:text="${employee.project.projectName}"></label></td>
 				<td> <a th:href="@{edit/{id}(id=${employee.id})}"><input id="edit" type="button" value="Edit" ></a></td>
 				<td> <a th:href="@{deleteemployee/{id}(id=${employee.name})}"><input id="delete" type="button" value="Delete" ></a></td>
 			</tr>
