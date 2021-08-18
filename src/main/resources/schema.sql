@@ -15,8 +15,6 @@ create table if not exists Project(
 
 );
 
-
-
 create table if not exists Employee(
 	id bigint not null primary key auto_increment,
 	name varchar(30),

@@ -1,8 +1,8 @@
 package com.wipro.rp.skillmng.web;
 
 import com.wipro.rp.skillmng.data.ProjectRepository;
+import com.wipro.rp.skillmng.data.UserRepository;
 import com.wipro.rp.skillmng.domain.Project;
-import com.wipro.rp.skillmng.service.EditForm;
 import com.wipro.rp.skillmng.service.EmployeeService;
 import com.wipro.rp.skillmng.service.RegistrationForm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +22,14 @@ public class EmployeeListController {
 	private EmployeeRepository employeeRepo;
 	private EmployeeService employeeService;
 	private ProjectRepository projectRepository;
+	private UserRepository userRepository;
 
 	@Autowired
 	public EmployeeListController(EmployeeRepository employeeRepo, EmployeeService employeeService, ProjectRepository projectRepository) {
 		this.employeeRepo = employeeRepo;
 		this.employeeService = employeeService;
 		this.projectRepository = projectRepository;
+		this.userRepository = userRepository;
 	}
 
 	@GetMapping("/employeelist")
@@ -52,31 +54,35 @@ public class EmployeeListController {
 
 	@GetMapping("employeedata/{id}")
 	public String processEdit(Model model,
-							  @SessionAttribute("id") Employee employee,
-							  EditForm editForm) {
-		employee = employeeRepo.findById(employee.getId()).get();
-		Project project = projectRepository.findByProjectName(employee.getProject().getProjectName()).get();
-
+							  @SessionAttribute("id") Long id) {
 
 		model.addAttribute("projectList", projectRepository.findAll());
-		model.addAttribute("employee", employee);
-		model.addAttribute("project", project);
+		model.addAttribute("employee", employeeRepo.findEmployeeById(id));
+		model.addAttribute("project", projectRepository.findAll());
+		model.addAttribute("registrationForm", new RegistrationForm());
 
 		return "employeedata";
 	}
 
-	@PostMapping("/employeedata/save")
-	public String saveEditEmployee(Model model, EditForm editForm,
-								   @SessionAttribute("id") Employee employee){
-		Employee employee1 = employeeRepo.findById(employee.getId()).get();
-		employeeRepo.delete(employeeService.findEmployeeById(employee.getId()));
-		model.addAttribute("employee", employee1);
-		employee1.setProject(employee.getProject());
-		employee1 = editForm.DTOtoEntity(employee1);
-		employeeRepo.save(employee1);
-			model.addAttribute("success", "Employee Edited");
+	@PostMapping("/employeedata/{id}")
+	public String saveEditEmployee(Model model, RegistrationForm registrationForm,
+								   Employee employee,
+								   @PathVariable("id") Long id){
+
+		Project project = projectRepository.findByProjectName(employee.getProject().getProjectName()).get();
+		employee = employeeRepo.findEmployeeById(id);
+		employee.setProject(project);
+		employeeRepo.delete(employeeRepo.findEmployeeById(id));
+		employeeRepo.save(registrationForm.DTOtoEntity(employee));
+			model.addAttribute("success", "User created test");
+			return "redirect:/employeelist";
 
 
-		return "employeedata";
+//		Employee employee1 = employeeRepo.findEmployeeById(id);
+//		projectRepository.save(registrationForm.getProject());
+//		employeeRepo.save(registrationForm);
+//		model.addAttribute("success", "Employee Edited");
+
+
 	}
 }

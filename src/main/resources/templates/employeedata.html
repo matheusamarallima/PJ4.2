@@ -29,35 +29,35 @@
 <div class="container">
     <h3>Employee Data</h3>
     <hr/>
-    <form method="POST" id="editForm" th:action="@{/employeedata/save}" th:object="${editForm}">
+    <form method="POST" id="editForm" th:action="@{{id}(id=${employee.id})}" th:object="${registrationForm}">
         <div class="gridForm">
             <div><label for="userId">User Id: </label></div>
-            <div><input style="background-color: #BBBBBB;" disabled th:name="user.username" th:value="${employee.getUser.username}" type="text" name="userId" id="userId" maxlength="30"/></div>
+            <div><input style="background-color: #BBBBBB;" disabled th:value="${employee.getUser.username}" type="text" name="userId" id="userId" maxlength="30"/></div>
             <div><label for="name">Name: </label></div>
-            <div><input style="background-color: #BBBBBB;" disabled th:name="name" th:value="${employee.name}" type="text" name="name" id="name" maxlength="30"/></div>
+            <div><input style="background-color: #BBBBBB;" th:name="name" disabled th:value="${name}" name="name" id="name" maxlength="30"/></div>
             <div><label for="age">Age: </label></div>
-            <div><input style="background-color: #BBBBBB;" disabled th:name="age" th:value="${employee.age}" type="text" name="age" id="age" min="0" max="999" maxlength="3"/></div>
+            <div><input style="background-color: #BBBBBB;" disabled th:value="${employee.age}" type="text" name="age" id="age" min="0" max="999" maxlength="3"/></div>
             <div><label for="password">Password: </label></div>
-            <div><input style="background-color: #BBBBBB;" disabled th:name="user.password" th:value="${employee.getUser.password}" type="password" name="password" id="password" maxlength="30"/></div>
+            <div><input style="background-color: #BBBBBB;" disabled th:value="${employee.getUser.password}" type="password" name="password" id="password" maxlength="30"/></div>
             <div><label for="petname">Pet Name: </label></div>
-            <div><input style="background-color: #BBBBBB;" disabled th:name="petName" th:value="${employee.petName}" type="text" name="petname" id="petname" maxlength="30"/></div>
+            <div><input style="background-color: #BBBBBB;" disabled th:value="${employee.petName}" type="text" name="petname" id="petname" maxlength="30"/></div>
             <div><label for="gender">Gender: </label></div>
             <div>
-                <select name="gender" style="background-color: #BBBBBB;" disabled th:name="gender" th:value="${employee.gender}" id="gender">
+                <select name="gender" style="background-color: #BBBBBB;" disabled th:value="${employee.gender}" id="gender">
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
                 </select>
             </div>
             <div label for="project">Project Name</label>
                 <select th:name="project.projectName" input style="background-color: #BBBBBB;">
-                    <option th:value="${project.projectName}"  th:each="project, loop : ${projectList}" th:text="${project.projectName}" ></option>
+                    <option th:value="${project.projectName}"  th:each="project, loop : ${projectList}" th:text="${project.projectId}" ></option>
                 </select>
             </div>
             <div></div>
             <div>
                 <div label for="job">Role:</label></div>
                 <div>
-                    <select name="job" style="background-color: #BBBBBB;" disabled th:name="job" id="job">
+                    <select name="job" style="background-color: #BBBBBB;" disabled th:value="${job}" id="job">
                         <option value="Systems Analyst">Systems Analyst</option>
                         <option value="Quality Assurance Tester">Quality Assurance Tester</option>
                         <option value="Database Manager">Database Manager</option>
@@ -67,7 +67,7 @@
             <div>
                 <div label for="band">Band:</label></div>
                 <div>
-                    <select name="band" style="background-color: #BBBBBB;" disabled th:name="band" id="band">
+                    <select name="band" style="background-color: #BBBBBB;" disabled th:name="${band}" id="band">
                         <option value="B1">B1</option>
                         <option value="B3">B2</option>
                         <option value="B2">B3</option>

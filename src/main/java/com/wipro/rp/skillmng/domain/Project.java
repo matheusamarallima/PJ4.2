@@ -18,7 +18,7 @@ public class Project {
     private String projectName;
     private String projectStartDate;
     private String projectEndDate;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
     @JoinColumn(name = "employee_id")
     private List<Employee> employeeList;
 

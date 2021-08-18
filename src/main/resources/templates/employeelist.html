@@ -48,6 +48,9 @@
 				<td> <a th:href="@{edit/{id}(id=${employee.id})}"><input id="edit" type="button" value="Edit" ></a></td>
 				<td> <a th:href="@{deleteemployee/{id}(id=${employee.name})}"><input id="delete" type="button" value="Delete" ></a></td>
 			</tr>
+
+			<div id="error"><span th:if="${success}">User edited</span></div>
+
 		</table>
 	</div>
 </div>

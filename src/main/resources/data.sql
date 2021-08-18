@@ -17,7 +17,7 @@ insert into Project(id, project_id, project_name, project_start_date, project_en
 values(3, 'PWP3', 'Projeto wipro 3', '12/12/20', '25/12/2021');
 
 insert into Employee(id, name, user_id, gender, pet_name, job, band, age, project_id)
-values(1, 'Mock', 2, 'Male', 'Rex', 'Job', 'Band', '24', 1);
+values(1, 'Mock', 2, 'Male', 'Rex', 'Quality Assurance Testes', 'B2', '24', 1);
 
 --delete from Role;
 --insert into Role (id, name) values(1, 'Systems Analyst');
