@@ -2,11 +2,7 @@ package com.wipro.rp.skillmng.web;
 
 import com.wipro.rp.skillmng.data.EmployeeRepository;
 import com.wipro.rp.skillmng.data.ProjectRepository;
-import com.wipro.rp.skillmng.domain.Employee;
-import com.wipro.rp.skillmng.domain.Project;
-import com.wipro.rp.skillmng.service.EditForm;
 import com.wipro.rp.skillmng.service.EmployeeService;
-import com.wipro.rp.skillmng.service.RegistrationForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -15,10 +11,9 @@ import org.springframework.web.bind.annotation.*;
 
 import com.wipro.rp.skillmng.domain.User;
 
-import java.security.Principal;
 
 
-//@SessionAttributes({"username"})
+
 @Controller
 public class LoginController {
 
@@ -63,45 +58,6 @@ public class LoginController {
 		return "redirect:/login";
 	}
 
-
-
-//
-//	@GetMapping("/mydata/{username}")
-//	public String editEmployee(@PathVariable("username") String username, Model model){
-//		employeeService.editEmployee();
-//		model.addAttribute("username", username);
-//		return "redirect:/employeedata/{username}";
-//	}
-//
-//	@GetMapping("mydata/{username}")
-//	public String processEdit(Model model,
-//							  @SessionAttribute("username") Employee employee,
-//							  EditForm editForm) {
-//		employee = employeeService.findEmployeeByUsername();
-//		Project project = projectRepository.findByProjectName(employee.getProject().getProjectName()).get();
-//
-//
-//		model.addAttribute("projectList", projectRepository.findAll());
-//		model.addAttribute("employee", employee);
-//		model.addAttribute("project", project);
-//
-//		return "mydata";
-//	}
-//
-//	@PostMapping("/mydata/save")
-//	public String saveEditEmployee(Model model, EditForm editForm,
-//								   @SessionAttribute("username") Employee employee){
-//		Employee employee1 = employeeRepo.findByUsername(employee.getUser().getUsername()).get();
-//		employeeRepo.delete(employeeService.findEmployeeByUsername(employee.getUser().getUsername()));
-//		model.addAttribute("employee", employee1);
-//		employee1.setProject(employee.getProject());
-//		employee1 = editForm.DTOtoEntity(employee1);
-//		employeeRepo.save(employee1);
-//		model.addAttribute("success", "Employee Edited");
-//
-//
-//		return "mydata";
-//	}
 
 
 }

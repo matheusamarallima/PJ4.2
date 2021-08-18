@@ -35,7 +35,7 @@
 							<th>Project Name</th>
 							<th>Start Date</th>
 							<th>End Date</th>
-<!--							<th>Edit</th>-->
+							<th>Edit</th>
 							<th>Delete</th>
 						</tr>
 						<tr th:each="project, loop : ${projectList}">
@@ -43,11 +43,13 @@
 							<td><label th:id="projectName+(${loop.index}+1)" th:text="${project.projectName}"></label></td>
 							<td><label th:id="projectStartDate+(${loop.index}+1)" th:text="${project.projectStartDate}"></label></td>
 							<td><label th:id="projectEndDate+(${loop.index}+1)" th:text="${project.projectEndDate}"></label></td>
-<!--							<td> <a th:href="@{edit/{projectName}(projectName=${project.projectName})}"><input id="edit" type="button" value="Edit" ></a></td>-->
-							<td> <a th:href="@{delete/{id}(id=${project.projectName})}"><input id="delete" type="button" value="Delete" ></a></td>
-<!--							<td><button th:id="deleteUser+(${loop.index}+1)" onclick="javascript: deleteEmployee(this)" th:value="${project.projectId}">Delete</button></td>-->
+							<td> <a th:href="@{editpr/{id}(id=${project.id})}"><input id="edit" type="button" value="Edit" ></a></td>
+							<td> <a th:href="@{delete/{id}(id=${project.id})}"><input id="delete" type="button" value="Delete" ></a></td>
+
 						</tr>
 					</table>
+				<div id="success"><span th:text="${error}"></span>
+
 				</div>
 			</div>
 		</div>

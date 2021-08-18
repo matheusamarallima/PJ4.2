@@ -18,7 +18,7 @@
 <div class="container">
     <h3>My Data</h3>
     <hr/>
-    <form method="POST" id="editForm" th:action="@{/mydata/save}" th:object="${editForm}">
+    <form method="POST" id="editForm" th:action="@{/mydata/save}" th:object="${registrationForm}">
         <div class="gridForm">
             <div><label for="userId">User Id: </label></div>
             <div><input style="background-color: #BBBBBB;" th:name="user.username" th:value="${employee.getUser.username}" type="text" name="userId" id="userId" maxlength="30"/></div>
@@ -39,7 +39,7 @@
             </div>
             <div label for="project">Project Name</label>
                 <select th:name="project.projectName" input style="background-color: #BBBBBB;">
-                    <option th:value="${project.projectName}"  th:each="project, loop : ${projectList}" th:name="${project.projectName}" ></option>
+                    <option th:value="${project.projectName}"  th:each="project, loop : ${projectList}" th:text="${project.projectName}" ></option>
                 </select>
             </div>
             <div></div>
@@ -63,7 +63,7 @@
                     </select>
                 </div>
             </div>
-            <div><button id="Save">Save</button></div>
+            <div><button type="submit" id="Save">Save</button></div>
             <div id="error"><span th:if="${success}">Employee updated</span></div>
 
         </div>

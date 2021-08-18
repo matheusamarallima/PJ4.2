@@ -4,6 +4,7 @@ import com.wipro.rp.skillmng.domain.Project;
 
 public class ProjectDataForm {
 
+    private Long id;
     private String projectId;
     private String projectName;
     private String projectStartDate;
@@ -14,6 +15,14 @@ public class ProjectDataForm {
                 projectDataForm.getProjectName(), projectDataForm.getProjectStartDate(),
                 projectDataForm.getProjectEndDate());
 
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getProjectId() {

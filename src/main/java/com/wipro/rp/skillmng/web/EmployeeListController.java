@@ -73,15 +73,12 @@ public class EmployeeListController {
 		employee = employeeRepo.findEmployeeById(id);
 		employee.setProject(project);
 		employeeRepo.delete(employeeRepo.findEmployeeById(id));
+		employee.setId(id);
 		employeeRepo.save(registrationForm.DTOtoEntity(employee));
-			model.addAttribute("success", "User created test");
-			return "redirect:/employeelist";
 
+		model.addAttribute("success", "User created test");
+		return "redirect:/employeelist";
 
-//		Employee employee1 = employeeRepo.findEmployeeById(id);
-//		projectRepository.save(registrationForm.getProject());
-//		employeeRepo.save(registrationForm);
-//		model.addAttribute("success", "Employee Edited");
 
 
 	}

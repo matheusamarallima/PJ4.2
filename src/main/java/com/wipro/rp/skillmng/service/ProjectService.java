@@ -1,6 +1,7 @@
 package com.wipro.rp.skillmng.service;
 
 import com.wipro.rp.skillmng.data.ProjectRepository;
+import com.wipro.rp.skillmng.domain.Employee;
 import com.wipro.rp.skillmng.domain.Project;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,7 +42,25 @@ public class ProjectService {
         //caso ela coloque algo q n exista, ele trata para não quebrar o código
     }
 
+    public boolean editProject(Project project) {
+        if(findProjectByName(project.getProjectName()) != null){
+            projectRepository.save(project);
+            return true;
+
+        }
+        return false;
+    }
+
+//    public boolean findEmployeesInProject(Project project){
+//        if(findProjectByName(project.getProjectName()) == null){
+//            projectRepository.save(project);
+//            return true;
+//
+//        }
+//        return false;
+    }
 
 
 
-}
+
+

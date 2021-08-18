@@ -18,6 +18,7 @@ public interface EmployeeRepository
 	public Employee findByUserUsernameAndPetName(String username, String petName);
     Optional<Employee> findByName(String name);
     Employee findEmployeeById(Long id);
+    Employee findEmployeeByName(String name);
 
     Employee findByUserUsername(User user);
 }

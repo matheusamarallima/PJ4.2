@@ -7,14 +7,14 @@ import com.wipro.rp.skillmng.domain.Employee;
 import com.wipro.rp.skillmng.domain.Project;
 import com.wipro.rp.skillmng.service.EditForm;
 import com.wipro.rp.skillmng.service.EmployeeService;
+import com.wipro.rp.skillmng.service.RegistrationForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.Registration;
 import java.security.Principal;
 import java.util.Optional;
 
@@ -41,38 +41,28 @@ public class MyDataController {
 
         model.addAttribute("projectList", projectRepository.findAll());
         model.addAttribute("employee", employee);
+        model.addAttribute("registrationForm", new RegistrationForm());
+
         return "mydata";
     }
 
     @PostMapping("/mydata/save")
-    public String saveEditEmployee(Model model, @ModelAttribute EditForm editForm,
-                                  Principal principal){
+    public String saveEditEmployee(ModelMap model, RegistrationForm form,
+                                   Principal principal,
+                                   Employee employee){
 
-        Employee employee = employeeRepo.findByUserUsername(editForm.getUser());
+        Project project = projectRepository.findByProjectName(employee.getProject().getProjectName()).get();
+        employeeRepo.delete(employeeRepo.findEmployeeByName(principal.getName()));
+        employee.setProject(project);
+        employee.getUser().setRole("ROLE_EMPLOYEE");
         employeeRepo.save(employee);
 
 
-//        employee1.setProject(principal.getName());
-//        employee1 = editForm.DTOtoEntity(employee1);
-
         model.addAttribute("success", "Employee Edited");
-
 
         return "home";
     }
 
 
 
-//    public String processEdit(Model model,EditForm editForm) {
-//        editForm
-//        employee = employeeRepo.findById(employee.getId()).get();
-//        Project project = projectRepository.findByProjectName(employee.getProject().getProjectName()).get();
-//
-//
-//        model.addAttribute("projectList", projectRepository.findAll());
-//        model.addAttribute("employee", employee);
-//        model.addAttribute("project", project);
-//
-//        return "mydata";
-//    }
 }
