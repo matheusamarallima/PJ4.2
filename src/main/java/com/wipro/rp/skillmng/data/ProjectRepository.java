@@ -1,5 +1,6 @@
 package com.wipro.rp.skillmng.data;
 
+import com.wipro.rp.skillmng.domain.Employee;
 import com.wipro.rp.skillmng.domain.Project;
 import org.springframework.data.repository.CrudRepository;
 
@@ -14,8 +15,6 @@ public interface ProjectRepository extends CrudRepository<Project, Long> {
 
     Optional<Project> findByProjectName(String projectName);
 
-
-    Project findByProjectId(Long ProjectId);
 
 //    Project findProjectById(Long id);
 

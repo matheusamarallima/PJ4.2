@@ -43,12 +43,32 @@
 							<td><label th:id="projectName+(${loop.index}+1)" th:text="${project.projectName}"></label></td>
 							<td><label th:id="projectStartDate+(${loop.index}+1)" th:text="${project.projectStartDate}"></label></td>
 							<td><label th:id="projectEndDate+(${loop.index}+1)" th:text="${project.projectEndDate}"></label></td>
-							<td> <a th:href="@{editpr/{id}(id=${project.id})}"><input id="edit" type="button" value="Edit" ></a></td>
-							<td> <a th:href="@{delete/{id}(id=${project.id})}"><input id="delete" type="button" value="Delete" ></a></td>
+							<td><a th:href="@{/editproject/}+${project.id}"><button  th:value="${project.id}">Edit</button></a></td>
+							<td> <a th:href="@{/deleteproject/}+${project.id}"><button  th:value="${project.id}">Delete</button></a></td>
 
 						</tr>
 					</table>
-				<div id="success"><span th:text="${error}"></span>
+				<div id="success"><span th:text="${error}"></span></div>
+
+				<div id="error"><span th:if="${employeeList}">Project already exists
+        <h3>Employee List</h3>
+        <div>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Role</th>
+                    <th>Band</th>
+
+                </tr>
+                <tr th:each="employee, loop : ${employeeList}">
+                    <td><label th:id="name+(${loop.index}+1)" th:text="${employee.name}"></label></td>
+                    <td><label th:id="role+(${loop.index}+1)" th:text="${employee.job}"></label></td>
+                    <td><label th:id="band+(${loop.index}+1)" th:text="${employee.band}"></label></td>
+                </tr>
+            </table>
+			<!--					class="btn btn-primary btn-sm mb-3"-->
+        </div>
+    </span></div>
 
 				</div>
 			</div>

@@ -3,6 +3,7 @@ package com.wipro.rp.skillmng.data;
 import java.util.List;
 import java.util.Optional;
 
+import com.wipro.rp.skillmng.domain.Project;
 import com.wipro.rp.skillmng.domain.User;
 import com.wipro.rp.skillmng.service.EditForm;
 import org.springframework.data.repository.CrudRepository;
@@ -21,32 +22,7 @@ public interface EmployeeRepository
     Employee findEmployeeByName(String name);
 
     Employee findByUserUsername(User user);
-}
-//    @GetMapping("employeedata/{id}")
-//    public String processEdit(Model model,
-//                              @PathVariable Long id,
-//                              EditForm editForm){
-//
-//        model.addAttribute("projectList", projectRepository.findAll());
-//        model.addAttribute("employee", employeeRepo.findEmployeeById(id));
-//        model.addAttribute("project", projectRepository.findAll());
-//
-//        return "employeedata";
-//    }
 
-//	@Transactional
-//	@PostMapping("/employeedata/{id}")
-//	public String saveEditEmployee(Model model, EditForm editForm,
-//								   @PathVariable Long id){
-//		Employee employee1 = employeeRepo.findEmployeeById(id);
-////		employeeRepo.delete(employeeService.findEmployeeById(employee.getId()));
-////		model.addAttribute("employee", employee1);
-//		employee1.setProject(editForm.getProject());
-////		employee1 = editForm.DTOtoEntity(employee1);
-//		employeeRepo.save(employee1);
-//
-//		model.addAttribute("success", "Employee Edited");
-//
-//
-//		return "employeedata";
-//	}
+    List<Employee> findAllByProjectId(Long id);
+
+}

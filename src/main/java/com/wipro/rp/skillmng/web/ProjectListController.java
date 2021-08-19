@@ -1,5 +1,6 @@
 package com.wipro.rp.skillmng.web;
 
+import com.wipro.rp.skillmng.data.EmployeeRepository;
 import com.wipro.rp.skillmng.data.ProjectRepository;
 import com.wipro.rp.skillmng.domain.Employee;
 import com.wipro.rp.skillmng.domain.Project;
@@ -11,16 +12,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Optional;
+
 @Controller
 public class ProjectListController {
 
     private final ProjectService projectService;
     private final ProjectRepository projectRepository;
+    private final EmployeeRepository employeeRepository;
 
     @Autowired
-    public ProjectListController(ProjectService projectService, ProjectRepository projectRepository) {
+    public ProjectListController(ProjectService projectService, ProjectRepository projectRepository, EmployeeRepository employeeRepository) {
         this.projectService = projectService;
         this.projectRepository = projectRepository;
+        this.employeeRepository = employeeRepository;
+
     }
 
     @GetMapping("projectlist")
@@ -29,44 +36,53 @@ public class ProjectListController {
         return "projectlist";
     }
 
-    @GetMapping("/delete/{id}")
+    @GetMapping("/deleteproject/{id}")
     public String deleteProject(@PathVariable("id") Long id, Model model){
-        Project project = projectRepository.findByProjectId(id);
-        if(project.getEmployeeList() != null){
-            model.addAttribute("employeeList", projectRepository.findByProjectId(id).getEmployeeList());
+        Optional<Project> project = projectRepository.findById(id);
+        List<Employee> employeeList = employeeRepository.findAllByProjectId(id);
+
+        if(project.isPresent()){
+            if(!employeeList.isEmpty()) {
+                model.addAttribute("employeeList", employeeList);
+                return "redirect:/projectlist";
+            }
+            projectRepository.delete(project.get());
             return "redirect:/projectlist";
         }
-        projectRepository.delete(projectRepository.findByProjectId(project.getId()));
         return "redirect:/projectlist";
     }
 
-    @GetMapping("/editpr/{id}")
-    public String editProject(@PathVariable("id") Long id, Model model){
-        model.addAttribute("id", id);
-        return "redirect:/editproject/{id}";
-    }
-
-    @GetMapping("editproject/{id}")
+    @GetMapping("/editproject/{id}")
     public String processEdit(Model model,
                               @PathVariable("id") Long id) {
-        Project project = projectRepository.findByProjectId(id);
-        model.addAttribute("project", project);
-        model.addAttribute("projectDataForm", new ProjectDataForm());
+        Optional<Project> project = projectRepository.findById(id);
+        if(project.isPresent()){
+            model.addAttribute("project", project.get());
+            model.addAttribute("projectDataForm", new ProjectDataForm());
 
-        return "editproject";
+            return "editproject";
+        }
+        return "projectlist";
     }
 
-//    @PostMapping("/editproject/{project}")
-//    public String saveEditProject(Model model,
-//                                  ProjectDataForm projectDataForm,
-//                                  @PathVariable("id") Long id){
-//
-//        projectRepository.save(projectDataForm.DTOtoEntity(projectDataForm));
-//        model.addAttribute("success", "User created test");
-//        return "redirect:/employeelist";
-//
-//
-//
-//    }
+    @PostMapping("/editproject/{id}")
+    public String saveEditProject(Model model,
+                                  ProjectDataForm projectDataForm,
+                                  @PathVariable("id") Long id){
+        Optional<Project> project = projectRepository.findById(id);
+        if(project.isPresent()){
+            project.get().setProjectId(projectDataForm.getProjectId());
+            project.get().setProjectName(projectDataForm.getProjectName());
+            project.get().setProjectStartDate(projectDataForm.getProjectStartDate());
+            project.get().setProjectEndDate(projectDataForm.getProjectEndDate());
+            projectRepository.save(project.get());
+            return "redirect:/projectlist";
+        }
+
+        return "redirect:/projectlist";
+
+
+
+    }
 
 }
