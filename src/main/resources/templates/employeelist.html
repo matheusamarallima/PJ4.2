@@ -45,7 +45,7 @@
 				<td><label th:text="${employee.job}"></label></td>
 				<td><label th:text="${employee.band}"></label></td>
 				<td><label th:text="${employee.project.projectName}"></label></td>
-				<td> <a th:href="@{edit/{id}(id=${employee.id})}"><input id="edit" type="button" value="Edit" ></a></td>
+				<td><a th:href="@{/edit/}+${employee.id}"><button  th:value="${employee.id}">Edit</button></a></td>
 				<td> <a th:href="@{deleteemployee/{id}(id=${employee.name})}"><input id="delete" type="button" value="Delete" ></a></td>
 			</tr>
 

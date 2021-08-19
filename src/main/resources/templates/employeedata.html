@@ -50,7 +50,7 @@
             </div>
             <div label for="project">Project Name</label>
                 <select th:name="project.projectName" input style="background-color: #BBBBBB;">
-                    <option th:value="${project.projectName}"  th:each="project, loop : ${projectList}" th:text="${project.projectId}" ></option>
+                    <option th:value="${project.projectName}"  th:each="project, loop : ${projectList}" th:text="${project.projectName}" ></option>
                 </select>
             </div>
             <div></div>

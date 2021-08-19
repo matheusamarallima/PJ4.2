@@ -3,6 +3,7 @@ package com.wipro.rp.skillmng.web;
 import com.wipro.rp.skillmng.data.ProjectRepository;
 import com.wipro.rp.skillmng.data.UserRepository;
 import com.wipro.rp.skillmng.domain.Project;
+import com.wipro.rp.skillmng.domain.User;
 import com.wipro.rp.skillmng.service.EmployeeService;
 import com.wipro.rp.skillmng.service.RegistrationForm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +15,12 @@ import com.wipro.rp.skillmng.data.EmployeeRepository;
 import com.wipro.rp.skillmng.domain.Employee;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @SessionAttributes({"id"})
 public class EmployeeListController {
-	
+
 	private EmployeeRepository employeeRepo;
 	private EmployeeService employeeService;
 	private ProjectRepository projectRepository;
@@ -40,13 +42,13 @@ public class EmployeeListController {
 	}
 
 	@GetMapping("/deleteemployee/{id}")
-	public String deleteEmployee(@PathVariable("id") String id, Model model){
+	public String deleteEmployee(@PathVariable("id") String id, Model model) {
 		employeeService.deleteEmployee(employeeService.findEmployeeByName(id));
 		return "redirect:/employeelist";
 	}
 
 	@GetMapping("/edit/{id}")
-	public String editEmployee(@PathVariable("id") Long id, Model model){
+	public String editEmployee(@PathVariable("id") Long id, Model model) {
 		employeeService.editEmployee(employeeService.findEmployeeById(id));
 		model.addAttribute("id", id);
 		return "redirect:/employeedata/{id}";
@@ -65,21 +67,31 @@ public class EmployeeListController {
 	}
 
 	@PostMapping("/employeedata/{id}")
-	public String saveEditEmployee(Model model, RegistrationForm registrationForm,
+	public String saveEditEmployee(Model model, RegistrationForm form,
 								   Employee employee,
-								   @PathVariable("id") Long id){
+								   @PathVariable("id") Long id) {
 
-		Project project = projectRepository.findByProjectName(employee.getProject().getProjectName()).get();
-		employee = employeeRepo.findEmployeeById(id);
-		employee.setProject(project);
-		employeeRepo.delete(employeeRepo.findEmployeeById(id));
-		employee.setId(id);
-		employeeRepo.save(registrationForm.DTOtoEntity(employee));
+		Employee employee1 = employeeRepo.findEmployeeById(id);
+		Optional<Employee> employee2 = Optional.ofNullable(employee1);
 
-		model.addAttribute("success", "User created test");
+		Project project = projectRepository.findProjectByProjectName(form.getProject().getProjectName());
+		employee1.setProject(project);
+
+		employeeRepo.save(employee1);
 		return "redirect:/employeelist";
 
 
-
 	}
+
 }
+
+
+//			projectRepository.save(employee.getProject());
+
+
+
+
+
+
+
+

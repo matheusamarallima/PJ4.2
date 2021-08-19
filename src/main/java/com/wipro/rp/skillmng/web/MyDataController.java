@@ -51,18 +51,25 @@ public class MyDataController {
                                    Principal principal,
                                    Employee employee){
 
-        Project project = projectRepository.findByProjectName(employee.getProject().getProjectName()).get();
-        employeeRepo.delete(employeeRepo.findEmployeeByName(principal.getName()));
-        employee.setProject(project);
-        employee.getUser().setRole("ROLE_EMPLOYEE");
-        employeeRepo.save(employee);
+        Employee employee1 = employeeRepo.findEmployeeByName(principal.getName());
+        Project project = projectRepository.findProjectByProjectName(form.getProject().getProjectName());
+
+        employee1.setId(employee1.getId());
+        employee1.setName(form.getName());
+        employee1.setGender(form.getGender());
+        employee1.setAge(form.getAge());
+        employee1.setBand(form.getBand());
+        employee1.setJob(form.getJob());
+        employee1.setProject(project);
+        employee1.getUser().setRole("ROLE_EMPLOYEE");
+        employeeRepo.save(employee1);
+        return "redirect:/home";
+        }
 
 
-        model.addAttribute("success", "Employee Edited");
 
-        return "home";
     }
 
 
 
-}
+
