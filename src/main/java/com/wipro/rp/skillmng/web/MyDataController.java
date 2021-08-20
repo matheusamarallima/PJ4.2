@@ -5,6 +5,7 @@ import com.wipro.rp.skillmng.data.EmployeeRepository;
 import com.wipro.rp.skillmng.data.ProjectRepository;
 import com.wipro.rp.skillmng.domain.Employee;
 import com.wipro.rp.skillmng.domain.Project;
+import com.wipro.rp.skillmng.security.SecurityConfig;
 import com.wipro.rp.skillmng.service.EditForm;
 import com.wipro.rp.skillmng.service.EmployeeService;
 import com.wipro.rp.skillmng.service.RegistrationForm;
@@ -25,6 +26,7 @@ public class MyDataController {
     private EmployeeRepository employeeRepo;
     private EmployeeService employeeService;
     private ProjectRepository projectRepository;
+    SecurityConfig securityConfig;
 
     @Autowired
     public MyDataController(EmployeeRepository employeeRepo, EmployeeService employeeService, ProjectRepository projectRepository) {
@@ -55,6 +57,8 @@ public class MyDataController {
         Project project = projectRepository.findProjectByProjectName(form.getProject().getProjectName());
 
         employee1.setId(employee1.getId());
+        employee1.getUser().setUsername(form.getUser().getUsername());
+        employee1.getUser().setPassword(form.getUser().getPassword());
         employee1.setName(form.getName());
         employee1.setGender(form.getGender());
         employee1.setAge(form.getAge());

@@ -16,6 +16,21 @@
 </head>
 <body>
 <div class="container">
+    <div class="menu">
+        <ul>
+            <!--					sec:authorize="hasRole('ADMIN')"-->
+            <li><a th:href="@{/home}">Home</a></li>
+            <li><a th:href="@{/skillsearch}">Skill Search</a></li>
+            <li ><a th:href="@{/employeelist}">Employee List</a></li>
+            <li>
+                <form name="logoutForm" id="logoutForm" method="post" th:action="@{logout}" th:hidden="true">
+                    <input type="submit" value="Logout"/>
+                </form>
+                <a id="logOutLink">Logout</a><br/>
+            </li>
+        </ul>
+    </div>
+<div class="container">
     <h3>My Data</h3>
     <hr/>
     <form method="POST" id="editForm" th:action="@{/mydata/save}" th:object="${registrationForm}">
