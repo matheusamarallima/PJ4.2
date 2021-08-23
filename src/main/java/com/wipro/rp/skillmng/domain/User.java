@@ -17,7 +17,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 
-//@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+
 @Entity
 public class User 
 	implements UserDetails{

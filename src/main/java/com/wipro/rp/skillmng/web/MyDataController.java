@@ -53,26 +53,25 @@ public class MyDataController {
                                    Principal principal,
                                    Employee employee){
 
-        Employee employee1 = employeeRepo.findEmployeeByName(principal.getName());
+        employee = employeeRepo.findEmployeeByName(principal.getName());
         Project project = projectRepository.findProjectByProjectName(form.getProject().getProjectName());
 
-        employee1.setId(employee1.getId());
-        employee1.getUser().setUsername(form.getUser().getUsername());
-        employee1.getUser().setPassword(form.getUser().getPassword());
-        employee1.setName(form.getName());
-        employee1.setGender(form.getGender());
-        employee1.setAge(form.getAge());
-        employee1.setBand(form.getBand());
-        employee1.setJob(form.getJob());
-        employee1.setProject(project);
-        employee1.getUser().setRole("ROLE_EMPLOYEE");
-        employeeRepo.save(employee1);
-        return "redirect:/home";
-        }
+        employee.setId(employee.getId());
+        employee.getUser().setUsername(form.getUser().getUsername());
+        employee.getUser().setPassword(form.getUser().getPassword());
+        employee.setName(form.getName());
+        employee.setGender(form.getGender());
+        employee.setAge(form.getAge());
+        employee.setBand(form.getBand());
+        employee.setJob(form.getJob());
+        employee.setProject(project);
+        employee.getUser().setRole("ROLE_EMPLOYEE");
+        employeeRepo.save(employee);
 
-
-
+        return "redirect:/login";
     }
+
+}
 
 
 

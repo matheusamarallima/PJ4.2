@@ -34,7 +34,6 @@ public class EmployeeService {
         employeeRepository.delete(employee);
     }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Employee findEmployeeByName(String name) {
         Optional<Employee> employee = employeeRepository.findByName(name);
         return employee.orElse(null);//retorna ou o projeto ou ele retorna nulo
@@ -56,12 +55,5 @@ public class EmployeeService {
         }
         return false;
     }
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-//    public User findEmployeeByUsername(String username) {
-//        Optional<User> employee = userRepository.findEmployeeByUsername(username);
-//        return employee.orElse(null);//retorna ou o projeto ou ele retorna nulo
-//        //caso ela coloque algo q n exista, ele trata para não quebrar o código
-//    }
 
 }

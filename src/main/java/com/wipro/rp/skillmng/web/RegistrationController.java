@@ -46,7 +46,6 @@ public class RegistrationController {
 		if(employeeService.createEmployee(form.DTOtoEntity(employee))){
 			model.addAttribute("success", "User created test");
 
-
 		}
 
 		return "login";

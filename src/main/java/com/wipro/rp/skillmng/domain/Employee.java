@@ -22,15 +22,6 @@ public class Employee {
 	@JoinColumn(name = "project_id")
 	private Project project;
 
-
-//	@ManyToOne //employee pode ter várias roles
-//	@JoinColumn(name = "role_id")
-//	private Role role;
-//	@ManyToOne
-//	@JoinColumn(name = "band_id")
-//	private Band band;
-
-	
 	public Employee() {}
 
 	public Employee(String name, String gender, String petName,

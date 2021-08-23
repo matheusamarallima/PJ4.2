@@ -13,10 +13,6 @@ import com.wipro.rp.skillmng.domain.User;
 public class RegistrationForm {
 	
 	private static final String ROLE_EMPLOYEE = "ROLE_EMPLOYEE";
-
-
-
-
 	private String name;
 	private String petName;
 	private Integer age;
@@ -51,10 +47,6 @@ public class RegistrationForm {
 		this.user = user;
 	}
 
-	//	public RegistrationForm(UserRepository userRepository) {
-//		this.userRepository = userRepository;
-//	}
-
 
 
 	public User toUser(User user) {
@@ -64,11 +56,6 @@ public class RegistrationForm {
 				new BCryptPasswordEncoder().encode(String.valueOf(user.getPassword())),
 				ROLE_EMPLOYEE);
 	}
-
-//
-//	private static String encodePassword(String password) {
-//		return new BCryptPasswordEncoder().encode(password);
-//	}
 
 
 	public Employee toEmployee(User user) {

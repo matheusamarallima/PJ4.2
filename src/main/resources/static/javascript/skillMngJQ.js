@@ -130,6 +130,49 @@ $(document).ready(function(){
 		});
 	}
 
+		if($("#save")){
+    		$("#save").click(function(){
+
+    			let message = "";
+    			let userIdPage = $("#userId").val().trim();
+    			let passwordPage = $("#password").val().trim();
+    			let namePage = $("#name").val().trim();
+    			let petnamePage = $("#petname").val().trim();
+    			let agePage = $("#age").val().trim();
+
+    			message += testUserId(userIdPage);
+    			message += testPassword(passwordPage);
+
+    			let patt = /[^a-zA-Z ]/g;
+    			if(namePage == ""){
+    				message += "Name is mandatory<br>";
+    			} else {
+    				if(namePage.length < 3 || namePage.length > 20){
+    					message += "Name must be at least 3 - 20 characters long<br>";
+    				}
+    				if(namePage != "" && patt.test(namePage)){
+    					message += "Name must contain letters only<br>";
+    				}
+    			}
+
+    			message += testPetname(petnamePage);
+
+    			if(agePage == ""){
+    				message += "Age is mandatory<br>";
+    			} else if(agePage.valueOf() < 18 || agePage.valueOf() > 120){
+    				message += "Age should be greater than 18 and less than 120<br>";
+    			}
+
+    			if(message == "") {
+    				$("#registerForm").submit();
+    			} else {
+    				$("#error").html(message);
+    				$("#error").css("visibility", "visible");
+    				return false;
+    			}
+    		});
+    	}
+
 	if($("#logOutLink")){
 		$("#logOutLink").click(function(){
 			$("#logoutForm").submit();

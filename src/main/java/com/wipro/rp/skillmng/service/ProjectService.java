@@ -51,13 +51,6 @@ public class ProjectService {
         return false;
     }
 
-//    public boolean findEmployeesInProject(Project project){
-//        if(findProjectByName(project.getProjectName()) == null){
-//            projectRepository.save(project);
-//            return true;
-//
-//        }
-//        return false;
     }
 
 
