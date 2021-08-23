@@ -21,8 +21,11 @@ public class ProjectService {
 
     public boolean createProject(Project project){
         if(findProjectByName(project.getProjectName()) == null){
-            projectRepository.save(project);
-            return true;
+            if(findProjectById(project.getProjectId()) == null){
+                projectRepository.save(project);
+                return true;
+            }
+            return false;
 
         }
         return false;
@@ -38,6 +41,12 @@ public class ProjectService {
 
     public Project findProjectByName(String projectName){
         Optional<Project> project = projectRepository.findByProjectName(projectName);
+        return project.orElse(null); //retorna ou o projeto ou ele retorna nulo
+        //caso ela coloque algo q n exista, ele trata para não quebrar o código
+    }
+
+    public Project findProjectById(String projectId){
+        Optional<Project> project = projectRepository.findByProjectId(projectId);
         return project.orElse(null); //retorna ou o projeto ou ele retorna nulo
         //caso ela coloque algo q n exista, ele trata para não quebrar o código
     }

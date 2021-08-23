@@ -135,13 +135,13 @@ $(document).ready(function(){
 
     			let message = "";
     			let userIdPage = $("#userId").val().trim();
-    			let passwordPage = $("#password").val().trim();
+//    			let passwordPage = $("#password").val().trim();
     			let namePage = $("#name").val().trim();
     			let petnamePage = $("#petname").val().trim();
     			let agePage = $("#age").val().trim();
 
     			message += testUserId(userIdPage);
-    			message += testPassword(passwordPage);
+//    			message += testPassword(passwordPage);
 
     			let patt = /[^a-zA-Z ]/g;
     			if(namePage == ""){
@@ -226,4 +226,87 @@ $(document).ready(function(){
 			}
 		});
 	}
+
+	      if($("#saveproject")) {
+                $("#saveproject").click(function() {
+                    let flag = true;
+                    let message = "";
+
+                    if($("#projectId").val() == "") {
+                        message += "Project Id is Mandatory <br>" ;
+                        flag = false;
+                    }
+                    else {
+                        let patt = /[A-Za-z0-9]{6,10}/;
+                        if(!patt.test($("#projectId").val())) {
+                            message += "Project Id must be alphanumeric and should contain 6 - 10 character <br>";
+                            flag = false;
+                        }
+                    }
+
+                    if($("#projectName").val() == "") {
+                        message += "Project name is Mandatory <br>" ;
+                        flag = false;
+                    }
+                    else {
+                        let patt = /[A-Za-z0-9]{6,10}/;
+                        if(!patt.test($("#projectName").val())) {
+                             message += "Project name must be alphanumeric and should contain 6 - 10 character <br>";
+                            flag = false;
+                        }
+                    }
+
+                    if($("#startDate").val() == "") {
+                        message += "Start date is Mandatory <br>" ;
+                        flag = false;
+                    }
+                    else {
+                        let patt = /^([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2})$/;
+                        if(!patt.test($("#startDate").val())) {
+                            message += "Date should be dd-mm-yyyy";
+                            flag = false;
+                        }
+                    }
+
+                    if($("#endDate").val() == "") {
+                        message += "End date is Mandatory <br>" ;
+                        flag = false;
+                    }
+                    else {
+                        let patt = /^([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2})$/;
+                        if(!patt.test($("#endDate").val())) {
+                            message += "Date should be dd-mm-yyyy";
+                            flag = false;
+                        }
+                    }
+//                    new Date1($("#startDate").val()).toISOString();
+//                    new Date2($("#endDate").val()).toISOString();
+//                    Date.parse(Date1);
+//                    Date.parse(Date2);
+//
+//                    var date1 = new Date($("#startDate").val());
+//                    var date2 = new Date($("#endDate").val());
+//
+//                    alert(date1);
+//                    alert(date2);
+//                    var Difference_In_Time = date2.getTime() - date1.getTime();
+//                    var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+//                    alert("FOI CALCULADO");
+//                    var result = Difference_In_Days;
+//                    alert(typeof(result));
+//                    if(result < 0){
+//                        alert("VALOR NEGATIVO");
+//                        message += "The end date should be bigger than the start date";
+//                        flag = false;
+//                    }
+
+                    if(flag) {
+                        $("#projectDataForm").submit();
+                    }
+                    else {
+                         $("#error").html(message);
+                         return false;
+                    }
+                });
+            }
 });

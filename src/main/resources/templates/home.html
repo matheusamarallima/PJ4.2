@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:th="http://www.thymeleaf.org">
+	  xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 	
 	<head>
 		<title>Skill Management</title>
@@ -14,8 +14,9 @@
 			<div class="menu">
 				<ul>
 					<li><a th:href="@{/home}">Home</a></li>
-					<li><a th:href="@{mydata}">My Data</a></li>
-					<li><a th:href="@{/employeelist}">Employee List</a></li>
+					<li sec:authorize =hasRole('EMPLOYEE')><a  th:href="@{mydata}">My Data</a></li>
+					<li sec:authorize =hasRole('ADMIN')><a  th:href="@{/employeelist}">Employee List</a></li>
+					<li sec:authorize =hasRole('ADMIN')><a  th:href="@{/projectlist}">Project List</a></li>
 					<li>
 						<form name="logoutForm" id="logoutForm" method="post" th:action="@{logout}" th:hidden="true">
 							<input type="submit" value="Logout"/>

@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class ProjectCreationController {
 
     private ProjectService projectService;
+    private ProjectRepository projectRepository;
 
     @Autowired
-    public ProjectCreationController(ProjectService projectService) {
+    public ProjectCreationController(ProjectService projectService, ProjectRepository projectRepository) {
         this.projectService = projectService;
+        this.projectRepository = projectRepository;
     }
 
     @GetMapping("/projectdata")
@@ -34,7 +36,9 @@ public class ProjectCreationController {
             model.addAttribute("success", "Project successfully added");
 
         }
-        model.addAttribute("employeeList", projectService.findProjectByName(projectDataForm.getProjectName()).getEmployeeList());
+        Project project1 = projectRepository.findByProjectName(projectDataForm.getProjectName()).get();
+
+        model.addAttribute("employeeList", project1.getEmployeeList());
         return "projectcreation";
     }
 

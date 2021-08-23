@@ -18,8 +18,7 @@ public class Project {
     private String projectName;
     private String projectStartDate;
     private String projectEndDate;
-    @OneToMany
-    @JoinColumn(name = "employee_id")
+    @OneToMany(mappedBy = "project", fetch = FetchType.LAZY)
     private List<Employee> employeeList;
 
     public Project() {

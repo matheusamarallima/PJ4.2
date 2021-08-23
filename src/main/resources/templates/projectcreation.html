@@ -1,5 +1,5 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
     <title>Registration</title>
@@ -17,10 +17,10 @@
 <div class="container">
     <div class="menu">
         <ul>
-            <!--					sec:authorize="hasRole('ADMIN')"-->
             <li><a th:href="@{/home}">Home</a></li>
-            <li><a th:href="@{/skillsearch}">Skill Search</a></li>
-            <li ><a th:href="@{/employeelist}">Employee List</a></li>
+            <li sec:authorize =hasRole('EMPLOYEE')><a  th:href="@{mydata}">My Data</a></li>
+            <li sec:authorize =hasRole('ADMIN')><a  th:href="@{/employeelist}">Employee List</a></li>
+            <li sec:authorize =hasRole('ADMIN')><a  th:href="@{/projectlist}">Project List</a></li>
             <li>
                 <form name="logoutForm" id="logoutForm" method="post" th:action="@{logout}" th:hidden="true">
                     <input type="submit" value="Logout"/>
@@ -29,7 +29,7 @@
             </li>
         </ul>
     </div>
-<div class="container">
+    <div class="main">
     <h3>Employee Data</h3>
     <hr/>
     <form method="POST" id="projectDataForm" th:action="@{/projectdata}" th:object="${projectDataForm}">
@@ -39,19 +39,22 @@
             <div><label for="projectName">Project Name: </label></div>
             <div><input style="background-color: #BBBBBB;" th:field="*{projectName}" type="text" name="projectName" id="projectName" maxlength="30"/></div>
             <div><label for="startDate">Start Date: </label></div>
-            <div><input style="background-color: #BBBBBB;" th:field="*{projectStartDate}" type="text" name="startDate" id="startDate" min="0" max="999" maxlength="3"/></div>
-            <div><label for="endDate">Password: </label></div>
-            <div><input style="background-color: #BBBBBB;" th:field="*{projectEndDate}" type="text" name="endDate" id="endDate" maxlength="30"/></div>
+            <div><input style="background-color: #BBBBBB;" th:field="*{projectStartDate}" type="text" name="startDate" id="startDate" min="0" max="999" maxlength="10"/></div>
+            <div><label for="endDate">End Date: </label></div>
+            <div><input style="background-color: #BBBBBB;" th:field="*{projectEndDate}" type="text" name="endDate" id="endDate" maxlength="10"/></div>
             </div>
             <div>
-            <div><button id="register">Save</button></div>
+            <div><button id="saveproject">Save</button></div>
 
-                <div id="success"><span th:text="${success}"></span>
-        </div>
+                <div id="error"><span th:text="${errorMessage}"></span></div>
+
+                <div id="success"><span th:text="${success}"></span></div>
 
 </div>
-    <div id="error"><span th:if="${employeeList}">Project already exists
-        <h3>Employee List</h3>
+    <div id="errorEm">
+        <span th:if="${employeeList}">
+            <h3>Project Already Exists</h3>
+            <h3>Project Data</h3>
         <div>
             <table>
                 <tr>
@@ -68,10 +71,12 @@
             </table>
             <!--					class="btn btn-primary btn-sm mb-3"-->
         </div>
-    </span></div>
+
+        </span>
+    </div>
     </form>
 </div>
-
+</div>
 </body>
 
 </html>

@@ -1,5 +1,5 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
     <title>Registration</title>
@@ -17,10 +17,10 @@
 <div class="container">
     <div class="menu">
         <ul>
-            <!--					sec:authorize="hasRole('ADMIN')"-->
             <li><a th:href="@{/home}">Home</a></li>
-            <li><a th:href="@{/skillsearch}">Skill Search</a></li>
-            <li ><a th:href="@{/employeelist}">Employee List</a></li>
+            <li sec:authorize =hasRole('EMPLOYEE')><a  th:href="@{mydata}">My Data</a></li>
+            <li sec:authorize =hasRole('ADMIN')><a  th:href="@{/employeelist}">Employee List</a></li>
+            <li sec:authorize =hasRole('ADMIN')><a  th:href="@{/projectlist}">Project List</a></li>
             <li>
                 <form name="logoutForm" id="logoutForm" method="post" th:action="@{logout}" th:hidden="true">
                     <input type="submit" value="Logout"/>
@@ -30,7 +30,7 @@
         </ul>
     </div>
 <div class="container">
-    <h3>Employee Data</h3>
+    <h3>Edit Project Page</h3>
     <hr/>
     <form method="POST" id="projectDataForm" th:action="@{{id}(id=${project.id})}" th:object="${projectDataForm}">
         <div class="gridForm">
@@ -40,7 +40,7 @@
             <div><input style="background-color: #BBBBBB;" th:value="${project.projectName}" type="text" name="projectName" id="projectName" maxlength="30"/></div>
             <div><label for="startDate">Start Date: </label></div>
             <div><input style="background-color: #BBBBBB;" th:field="*{projectStartDate}" type="text" name="startDate" id="startDate" min="0" max="999" maxlength="3"/></div>
-            <div><label for="endDate">Password: </label></div>
+            <div><label for="endDate">End Date: </label></div>
             <div><input style="background-color: #BBBBBB;" th:field="*{projectEndDate}" type="text" name="endDate" id="endDate" maxlength="30"/></div>
         </div>
         <div>

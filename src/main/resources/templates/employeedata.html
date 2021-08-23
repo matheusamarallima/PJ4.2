@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
     <title>Employee List</title>
@@ -14,10 +14,10 @@
     <div class="container">
         <div class="menu">
         <ul>
-            <!--					sec:authorize="hasRole('ADMIN')"-->
             <li><a th:href="@{/home}">Home</a></li>
-            <li><a th:href="@{/skillsearch}">Skill Search</a></li>
-            <li ><a th:href="@{/employeelist}">Employee List</a></li>
+            <li sec:authorize =hasRole('EMPLOYEE')><a  th:href="@{mydata}">My Data</a></li>
+            <li sec:authorize =hasRole('ADMIN')><a  th:href="@{/employeelist}">Employee List</a></li>
+            <li sec:authorize =hasRole('ADMIN')><a  th:href="@{/projectlist}">Project List</a></li>
             <li>
                 <form name="logoutForm" id="logoutForm" method="post" th:action="@{logout}" th:hidden="true">
                     <input type="submit" value="Logout"/>
@@ -26,7 +26,7 @@
             </li>
         </ul>
         </div>
-<div class="container">
+<div class="main">
     <h3>Employee Data</h3>
     <hr/>
     <form method="POST" id="editForm" th:action="@{{id}(id=${employee.id})}" th:object="${registrationForm}">
@@ -48,31 +48,33 @@
                     <option value="Female">Female</option>
                 </select>
             </div>
-            <div label for="project">Project Name</label>
-                <select th:name="project.projectName" input style="background-color: #BBBBBB;">
-                    <option th:value="${project.projectName}"  th:each="project, loop : ${projectList}" th:text="${project.projectName}" ></option>
+            <div><label for="project">Project</label></div>
+            <div>
+                <select id="project" th:name="project.projectName" input style="background-color: #BBBBBB;">
+                    <option th:value="${project.projectName}" th:each="project, loop : ${projectList}"
+                            th:text="${project.projectName}"></option>
+                </select>
+            </div>
+
+            <div><label for="job">Role:</label></div>
+            <div>
+                <select name="job" disabled style="background-color: #BBBBBB;" th:name="job" id="job">
+                    <option value="Systems Analyst">Systems Analyst</option>
+                    <option value="Quality Assurance Tester">Quality Assurance Tester</option>
+                    <option value="Database Manager">Database Manager</option>
+                </select>
+            </div>
+
+            <div><label for="band">Band:</label></div>
+            <div>
+                <select name="band" disabled style="background-color: #BBBBBB;" th:name="band" id="band">
+                    <option value="B1">B1</option>
+                    <option value="B3">B2</option>
+                    <option value="B2">B3</option>
                 </select>
             </div>
             <div></div>
-            <div>
-                <div label for="job">Role:</label></div>
-                <div>
-                    <select name="job" style="background-color: #BBBBBB;" disabled th:value="${job}" id="job">
-                        <option value="Systems Analyst">Systems Analyst</option>
-                        <option value="Quality Assurance Tester">Quality Assurance Tester</option>
-                        <option value="Database Manager">Database Manager</option>
-                    </select>
-                </div>
-            </div>
-            <div>
-                <div label for="band">Band:</label></div>
-                <div>
-                    <select name="band" style="background-color: #BBBBBB;" disabled th:name="${band}" id="band">
-                        <option value="B1">B1</option>
-                        <option value="B3">B2</option>
-                        <option value="B2">B3</option>
-                    </select>
-                </div>
+
             </div>
             <div><button id="save">Save</button></div>
             <div id="error"><span th:if="${success}">User edited</span></div>
@@ -80,6 +82,8 @@
         </div>
     </form>
 </div>
+    </div>
 </body>
+
 
 </html>

@@ -9,8 +9,6 @@ public class EditForm {
 
     private static final String ROLE_EMPLOYEE = "ROLE_EMPLOYEE";
 
-//	UserRepository userRepository;
-
 
 
     private String userId;
@@ -32,9 +30,6 @@ public class EditForm {
                 toUser(employee.getUser()),employee.getProject());
 
     }
-//	public RegistrationForm(UserRepository userRepository) {
-//		this.userRepository = userRepository;
-//	}
 
 
 

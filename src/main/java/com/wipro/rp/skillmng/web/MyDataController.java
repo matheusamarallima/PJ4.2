@@ -10,10 +10,14 @@ import com.wipro.rp.skillmng.service.EditForm;
 import com.wipro.rp.skillmng.service.EmployeeService;
 import com.wipro.rp.skillmng.service.RegistrationForm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 
 import javax.servlet.Registration;
 import java.security.Principal;
@@ -27,12 +31,14 @@ public class MyDataController {
     private EmployeeService employeeService;
     private ProjectRepository projectRepository;
     SecurityConfig securityConfig;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public MyDataController(EmployeeRepository employeeRepo, EmployeeService employeeService, ProjectRepository projectRepository) {
+    public MyDataController(EmployeeRepository employeeRepo, EmployeeService employeeService, ProjectRepository projectRepository, PasswordEncoder passwordEncoder) {
         this.employeeRepo = employeeRepo;
         this.employeeService = employeeService;
         this.projectRepository = projectRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("mydata")
@@ -58,7 +64,6 @@ public class MyDataController {
 
         employee.setId(employee.getId());
         employee.getUser().setUsername(form.getUser().getUsername());
-        employee.getUser().setPassword(form.getUser().getPassword());
         employee.setName(form.getName());
         employee.setGender(form.getGender());
         employee.setAge(form.getAge());
