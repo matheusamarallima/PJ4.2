@@ -43,8 +43,8 @@ public class ProjectListController {
 
         if(project.isPresent()){
             if(!employeeList.isEmpty()) {
-                model.addAttribute("employeeList", employeeList);
-                return "redirect:/projectlist";
+                model.addAttribute("employeeList", employeeRepository.findAllByProjectId(id));
+                return "projectlist";
             }
             projectRepository.delete(project.get());
             return "redirect:/projectlist";
@@ -69,9 +69,9 @@ public class ProjectListController {
     public String saveEditProject(Model model,
                                   ProjectDataForm projectDataForm,
                                   @PathVariable("id") Long id){
+
         Optional<Project> project = projectRepository.findById(id);
         if(project.isPresent()){
-            project.get().setProjectId(projectDataForm.getProjectId());
             project.get().setProjectName(projectDataForm.getProjectName());
             project.get().setProjectStartDate(projectDataForm.getProjectStartDate());
             project.get().setProjectEndDate(projectDataForm.getProjectEndDate());

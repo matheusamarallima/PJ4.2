@@ -12,7 +12,7 @@ import com.wipro.rp.skillmng.domain.User;
 public class UserRepositoryUserDetailsService 
 	implements UserDetailsService {
 
-	private UserRepository userRepo;
+	private final UserRepository userRepo;
 	
 	public UserRepositoryUserDetailsService(UserRepository userRepo) {
 		this.userRepo = userRepo;

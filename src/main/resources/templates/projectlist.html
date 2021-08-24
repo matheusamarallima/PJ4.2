@@ -1,58 +1,75 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
-	<head>
-		<title>Project List</title>
-		<link rel="stylesheet" th:href="@{/css/skillMngStyle.css}">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<script th:src="@{/javascript/jquery.min.js}"></script>
-		<script th:src="@{/javascript/skillMngJQ.js}"></script>
-	</head>
+<head>
+    <title>Project List</title>
+    <link rel="stylesheet" th:href="@{/css/skillMngStyle.css}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script th:src="@{/javascript/jquery.min.js}"></script>
+    <script th:src="@{/javascript/skillMngJQ.js}"></script>
+</head>
 
-	<body>
-		<div class="container">
-			<div class="menu">
-				<ul>
-					<li><a th:href="@{/home}">Home</a></li>
-					<li sec:authorize =hasRole('EMPLOYEE')><a  th:href="@{mydata}">My Data</a></li>
-					<li sec:authorize =hasRole('ADMIN')><a  th:href="@{/employeelist}">Employee List</a></li>
-					<li sec:authorize =hasRole('ADMIN')><a  th:href="@{/projectlist}">Project List</a></li>
-					<li>
-						<form name="logoutForm" id="logoutForm" method="post" th:action="@{logout}" th:hidden="true">
-							<input type="submit" value="Logout"/>
-						</form>
-						<a id="logOutLink">Logout</a><br/>
-					</li>
-				</ul>
-			</div>
-			<div class="main">
-				<h3>Project List</h3>
-					<table border="1">
-						<tr>
-							<th>Project Id</th>
-							<th>Project Name</th>
-							<th>Start Date</th>
-							<th>End Date</th>
-							<th>Edit</th>
-							<th>Delete</th>
-						</tr>
-						<tr th:each="project, loop : ${projectList}">
-							<td><label th:id="projectId+(${loop.index}+1)" th:text="${project.projectId}">AAA</label></td>
-							<td><label th:id="projectName+(${loop.index}+1)" th:text="${project.projectName}"></label></td>
-							<td><label th:id="projectStartDate+(${loop.index}+1)" th:text="${project.projectStartDate}"></label></td>
-							<td><label th:id="projectEndDate+(${loop.index}+1)" th:text="${project.projectEndDate}"></label></td>
-							<td><a th:href="@{/editproject/}+${project.id}"><button  th:value="${project.id}">Edit</button></a></td>
-							<td> <a th:href="@{/deleteproject/}+${project.id}"><button  th:value="${project.id}">Delete</button></a></td>
+<body>
+<div class="container">
+    <div class="menu">
+        <ul>
+            <li><a th:href="@{/home}">Home</a></li>
+            <li sec:authorize=hasRole('EMPLOYEE')><a th:href="@{mydata}">My Data</a></li>
+            <li sec:authorize=hasRole('ADMIN')><a th:href="@{/employeelist}">Employee List</a></li>
+            <li sec:authorize=hasRole('ADMIN')><a th:href="@{/projectlist}">Project List</a></li>
+            <li>
+                <form name="logoutForm" id="logoutForm" method="post" th:action="@{logout}" th:hidden="true">
+                    <input type="submit" value="Logout"/>
+                </form>
+                <a id="logOutLink">Logout</a><br/>
+            </li>
+        </ul>
+    </div>
+    <div class="main">
+        <h3>Project List</h3>
+        <table border="1">
+            <tr>
+                <th>Project Id</th>
+                <th>Project Name</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            <tr th:each="project, loop : ${projectList}">
+                <td><label th:id="projectId+(${loop.index}+1)" th:text="${project.projectId}">AAA</label></td>
+                <td><label th:id="projectName+(${loop.index}+1)" th:text="${project.projectName}"></label></td>
+                <td><label th:id="projectStartDate+(${loop.index}+1)" th:text="${project.projectStartDate}"></label>
+                </td>
+                <td><label th:id="projectEndDate+(${loop.index}+1)" th:text="${project.projectEndDate}"></label></td>
+                <td><a th:href="@{/editproject/}+${project.id}">
+                    <button th:value="${project.id}">Edit</button>
+                </a></td>
+                <td><a th:href="@{/deleteproject/}+${project.id}">
+                    <button th:value="${project.id}">Delete</button>
+                </a></td>
 
-						</tr>
-					</table>
-				<div id="success"><span th:text="${error}"></span></div>
+            </tr>
+        </table>
+        <form name="addproject" id="addproject" method="get" th:action="@{/projectdata}">
+            <br><br><br>
+            <div align="left">
+                <input type="submit" value="New Project"/>
+            </div>
+        </form>
+        <div id="success"><span th:text="${error}"></span></div>
 
-				<div id="error"><span th:if="${employeeList}">Project already exists
-        <h3>Employee List</h3>
+        <div id="errorEm">
+
+        <span th:if="${employeeList}">
+
+            <h2>This project can't be deleted</h2>
+            <h3>Currently, there are people in this project</h3>
+            <h3>Project Data</h3>
+
         <div>
-            <table>
+            <table border="1">
                 <tr>
                     <th>Name</th>
                     <th>Role</th>
@@ -65,13 +82,15 @@
                     <td><label th:id="band+(${loop.index}+1)" th:text="${employee.band}"></label></td>
                 </tr>
             </table>
-			<!--					class="btn btn-primary btn-sm mb-3"-->
+            <!--					class="btn btn-primary btn-sm mb-3"-->
         </div>
-    </span></div>
 
-				</div>
-			</div>
-		</div>
-	</body>
+        </span>
+        </div>
+
+    </div>
+</div>
+</div>
+</body>
 
 </html>

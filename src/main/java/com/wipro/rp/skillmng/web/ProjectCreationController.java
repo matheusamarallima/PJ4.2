@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class ProjectCreationController {
 
-    private ProjectService projectService;
-    private ProjectRepository projectRepository;
+    private final ProjectService projectService;
+    private final ProjectRepository projectRepository;
 
     @Autowired
     public ProjectCreationController(ProjectService projectService, ProjectRepository projectRepository) {

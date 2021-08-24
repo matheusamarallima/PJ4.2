@@ -21,9 +21,9 @@ import java.util.Optional;
 @SessionAttributes({"id"})
 public class EmployeeListController {
 
-	private EmployeeRepository employeeRepo;
-	private EmployeeService employeeService;
-	private ProjectRepository projectRepository;
+	private final EmployeeRepository employeeRepo;
+	private final EmployeeService employeeService;
+	private final ProjectRepository projectRepository;
 	private UserRepository userRepository;
 
 	@Autowired

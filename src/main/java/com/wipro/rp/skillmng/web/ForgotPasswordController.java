@@ -16,7 +16,7 @@ import com.wipro.rp.skillmng.security.SecurityConfig;
 @SessionAttributes("employee")
 public class ForgotPasswordController {
 	
-	private EmployeeRepository employeeRepo;
+	private final EmployeeRepository employeeRepo;
 	
 	public ForgotPasswordController(EmployeeRepository employeeRepo) {
 		this.employeeRepo = employeeRepo;

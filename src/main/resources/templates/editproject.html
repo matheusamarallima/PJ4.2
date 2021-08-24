@@ -29,31 +29,41 @@
             </li>
         </ul>
     </div>
-<div class="container">
+<div class="main">
     <h3>Edit Project Page</h3>
     <hr/>
     <form method="POST" id="projectDataForm" th:action="@{{id}(id=${project.id})}" th:object="${projectDataForm}">
         <div class="gridForm">
             <div><label for="projectId">Project Id: </label></div>
-            <div><input style="background-color: #BBBBBB;"  th:value="${project.projectId}" type="text" name="projectId" id="projectId" maxlength="30"/></div>
+            <div><input style="background-color: #BBBBBB;"  th:name="projectId" th:value="${project.projectId}" type="text" name="projectId" id="projectId" maxlength="30" disabled /></div>
             <div><label for="projectName">Project Name: </label></div>
             <div><input style="background-color: #BBBBBB;" th:value="${project.projectName}" type="text" name="projectName" id="projectName" maxlength="30"/></div>
             <div><label for="startDate">Start Date: </label></div>
-            <div><input style="background-color: #BBBBBB;" th:field="*{projectStartDate}" type="text" name="startDate" id="startDate" min="0" max="999" maxlength="3"/></div>
+            <div><input style="background-color: #BBBBBB;" th:field="*{projectStartDate}" type="text" name="startDate" id="startDate" min="0" max="999" maxlength="10"/></div>
             <div><label for="endDate">End Date: </label></div>
-            <div><input style="background-color: #BBBBBB;" th:field="*{projectEndDate}" type="text" name="endDate" id="endDate" maxlength="30"/></div>
+            <div><input style="background-color: #BBBBBB;" th:field="*{projectEndDate}" type="text" name="endDate" id="endDate" maxlength="10"/></div>
         </div>
         <div>
-            <div><button id="register">Save</button></div>
+            <div><button id="saveproject">Save</button></div>
+
+            <div id="error"><span th:text="${errorMessage}"></span></div>
+
 
             <div id="success"><span th:text="${success}"></span>
+
             </div>
 
         </div>
-        <div id="error"><span th:if="${employeeList}">Project already exists
-        <h3>Employee List</h3>
+        <div id="errorEm">
+
+        <span th:if="${employeeList}">
+
+            <h2>This project can't be deleted</h2>
+            <h3>Currently, there are people in this project</h3>
+            <h3>Project Data</h3>
+
         <div>
-            <table>
+            <table border="1">
                 <tr>
                     <th>Name</th>
                     <th>Role</th>
@@ -68,7 +78,9 @@
             </table>
             <!--					class="btn btn-primary btn-sm mb-3"-->
         </div>
-    </span></div>
+
+        </span>
+        </div>
     </form>
 </div>
 

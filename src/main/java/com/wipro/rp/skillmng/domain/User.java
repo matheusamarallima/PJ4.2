@@ -128,12 +128,7 @@ public class User
 		}
 
 		if (username == null) {
-			if (other.username != null) {
-				return false;
-			}
-		} else if (!username.equals(other.username)) {
-			return false;
-		}
-		return true;
+			return other.username == null;
+		} else return username.equals(other.username);
 	}
 }

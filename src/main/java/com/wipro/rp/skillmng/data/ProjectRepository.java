@@ -9,7 +9,8 @@ import java.util.List;
 import java.util.Optional;
 
 
-public interface ProjectRepository extends CrudRepository<Project, Long> {
+public interface ProjectRepository
+        extends CrudRepository<Project, Long> {
 
     List<Project> findAll();
 
@@ -19,7 +20,7 @@ public interface ProjectRepository extends CrudRepository<Project, Long> {
     Optional<Project> findByProjectId(String projectId);
 
 
-//    Project findProjectById(Long id);
+
 
 
 }

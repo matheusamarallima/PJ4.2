@@ -19,7 +19,7 @@ import com.wipro.rp.skillmng.service.RegistrationForm;
 @RequestMapping("/register")
 public class RegistrationController {
 
-	private ProjectRepository projectRepo;
+	private final ProjectRepository projectRepo;
 
 	EmployeeService employeeService;
 

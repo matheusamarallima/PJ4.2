@@ -17,9 +17,9 @@ import com.wipro.rp.skillmng.domain.User;
 @Controller
 public class LoginController {
 
-	private EmployeeRepository employeeRepo;
-	private EmployeeService employeeService;
-	private ProjectRepository projectRepository;
+	private final EmployeeRepository employeeRepo;
+	private final EmployeeService employeeService;
+	private final ProjectRepository projectRepository;
 
 	@Autowired
 	public LoginController(EmployeeRepository employeeRepo, EmployeeService employeeService, ProjectRepository projectRepository) {
