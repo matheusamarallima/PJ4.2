@@ -135,13 +135,13 @@ $(document).ready(function(){
 
     			let message = "";
     			let userIdPage = $("#userId").val().trim();
-//    			let passwordPage = $("#password").val().trim();
+    			let passwordPage = $("#password").val().trim();
     			let namePage = $("#name").val().trim();
     			let petnamePage = $("#petname").val().trim();
     			let agePage = $("#age").val().trim();
 
     			message += testUserId(userIdPage);
-//    			message += testPassword(passwordPage);
+    			message += testPassword(passwordPage);
 
     			let patt = /[^a-zA-Z ]/g;
     			if(namePage == ""){
@@ -227,6 +227,61 @@ $(document).ready(function(){
 		});
 	}
 
+	function convertToMMddyyyy(date) {
+        let stringdate = date;
+        let dd = stringdate.substring(0,2);
+        let MM = stringdate.substring(3,5);
+        let yyyy = stringdate.substring(6,10);
+        return MM + "-" + dd + "-" + yyyy;
+    }
+
+
+	function testDateField(firstDate, lastDate) {
+        let tempfirst = convertToMMddyyyy(firstDate);
+        let templast = convertToMMddyyyy(lastDate);
+        const date1 = new Date(tempfirst);
+        const date2 = new Date(templast);
+
+//        let patt = new RegExp("^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)(\\d{4})$");
+        let patt = new RegExp("^\\d{2}-\\d{2}-\\d{4}$");
+        let diffTime = date2 - date1;
+        let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        console.log(diffDays + " days");
+
+        if (firstDate === "" || lastDate === "") {
+            returnmessage += "Date is mandatory<br>";
+
+        }
+        else if (!patt.test(tempfirst) && !patt.test(templast)) {
+            returnmessage += "Date field must be of format dd/mm/yyyy<br>";
+        }
+        else if (diffDays < 0) {
+            returnmessage += "End Date must be at least 1 day greater than Start Date<br>";
+        }
+        return returnmessage;
+    }
+
+    function testDateField(startDate, endDate){
+        let returnMessage = "";
+        let patt = new RegExp("^\d{2}-\d{2}-\d{4}$");
+
+        date1 = startDate.split("-").reverse().join("-");
+        date2 = endDate.split("-").reverse().join("-");
+        var oneDay = 24 * 60 * 60 * 1000;
+        var firstDate = new Date(date1);
+        var secondDate = new Date(date2);
+        difference = (Math.round((secondDate.getTime() - firstDate.getTime()) / (oneDay)) > 0);
+
+        if(startDate == "" && endDate == ""){
+            returnMessage = "Date is mandatory<br>";
+        } else if(!patt.test(startDate) && !patt.test(endDate)){
+            returnMessage += "Date field must be of format dd-mm-yyyy<br>";
+        } else if(!difference) {
+            returnMessage += "End Date must be at least 1 day greater than Start Date<br>"
+        }
+        return returnMessage;
+    }
+
 	      if($("#saveproject")) {
                 $("#saveproject").click(function() {
                     let flag = true;
@@ -256,6 +311,10 @@ $(document).ready(function(){
                         }
                     }
 
+//                    message += testDateField(document.getElementById("startDate").value, document.getElementById("endDate").value);
+
+
+
                     if($("#startDate").val() == "") {
                         message += "Start date is Mandatory <br>" ;
                         flag = false;
@@ -279,25 +338,9 @@ $(document).ready(function(){
                             flag = false;
                         }
                     }
-//                    new Date1($("#startDate").val()).toISOString();
-//                    new Date2($("#endDate").val()).toISOString();
-//                    Date.parse(Date1);
-//                    Date.parse(Date2);
 //
-//                    var date1 = new Date($("#startDate").val());
-//                    var date2 = new Date($("#endDate").val());
-//
-//                    alert(date1);
-//                    alert(date2);
-//                    var Difference_In_Time = date2.getTime() - date1.getTime();
-//                    var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
-//                    alert("FOI CALCULADO");
-//                    var result = Difference_In_Days;
-//                    alert(typeof(result));
-//                    if(result < 0){
-//                        alert("VALOR NEGATIVO");
-//                        message += "The end date should be bigger than the start date";
-//                        flag = false;
+//                    if(message != ""){
+//                    flag = false;
 //                    }
 
                     if(flag) {
